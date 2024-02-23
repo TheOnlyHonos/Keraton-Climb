@@ -22,8 +22,8 @@ public class PlayerMotor : MonoBehaviour
     private bool isGrounded;
 
     [Header("Headbob Parameters")]
-    [SerializeField] private float walkBobSpeed = 14f;
-    [SerializeField] private float walkBobAmount = .5f;
+    [SerializeField] private float walkBobSpeed = 12f;
+    [SerializeField] private float walkBobAmount = .05f;
     private float defaultYPos = 0;
     private float timer;
     public Camera cam;
