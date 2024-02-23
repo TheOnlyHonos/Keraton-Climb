@@ -26,6 +26,9 @@ public class PlayerHealthAndHunger : MonoBehaviour
     [SerializeField] private Image frontHungerBar;
     [SerializeField] private Image backHungerBar;
 
+    [Header("Respawn Point")]
+    [SerializeField] private Transform respawnPoint;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,6 +59,11 @@ public class PlayerHealthAndHunger : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             RestoreHunger(Random.Range(5, 10));
+        }
+
+        if (health <= 0)
+        {
+            Die(.3f);
         }
     }
 
@@ -113,8 +121,6 @@ public class PlayerHealthAndHunger : MonoBehaviour
 
             frontHungerBar.fillAmount = Mathf.Lerp(fillHungerFront, backHungerBar.fillAmount, percentComplete);
         }
-
-        Debug.Log(health + " " + hunger);
     }
 
     public void TakeDamage(float damage)
@@ -139,5 +145,12 @@ public class PlayerHealthAndHunger : MonoBehaviour
     {
         hunger += heal;
         lerpTimerHunger = 0f;
+    }
+
+    public void Die(float healthRatioAtRespawn)
+    {
+        health = maxHealth * healthRatioAtRespawn;
+        transform.position = respawnPoint.position;
+        Physics.SyncTransforms();
     }
 }

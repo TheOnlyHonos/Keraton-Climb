@@ -8,6 +8,7 @@ public class PlayerMotor : MonoBehaviour
 {
 
     [Header("Player Options")]
+    [SerializeField] private bool canMove = true;
     [SerializeField] private bool headBobbing = true;
     [SerializeField] private bool canJump = true;
 
@@ -50,19 +51,22 @@ public class PlayerMotor : MonoBehaviour
     //recieve inputs from InputManager.cs script and apply them to character controller
     public void ProcessMove(Vector2 input)
     {
-        Vector3 moveDirection = Vector3.zero;
-        moveDirection.x = input.x;
-        moveDirection.z = input.y;
-        controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
-
-        playerVelocity.y += gravity * Time.deltaTime;
-
-        if (isGrounded && playerVelocity.y < 0)
+        if (canMove)
         {
-            playerVelocity.y = -2f;
-        }
+            Vector3 moveDirection = Vector3.zero;
+            moveDirection.x = input.x;
+            moveDirection.z = input.y;
+            controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
 
-        controller.Move(playerVelocity * Time.deltaTime);
+            playerVelocity.y += gravity * Time.deltaTime;
+
+            if (isGrounded && playerVelocity.y < 0)
+            {
+                playerVelocity.y = -2f;
+            }
+
+            controller.Move(playerVelocity * Time.deltaTime);
+        }
     }
 
     public void Jump()
@@ -75,7 +79,7 @@ public class PlayerMotor : MonoBehaviour
 
     public void HandleHeadbob(Vector2 input)
     {
-        if (headBobbing)
+        if (headBobbing && canMove)
         {
             if (!isGrounded) return;
 
