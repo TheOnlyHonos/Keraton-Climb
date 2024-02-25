@@ -11,11 +11,25 @@ public class PlayerMotor : MonoBehaviour
     [SerializeField] private bool canMove = true;
     [SerializeField] private bool headBobbing = true;
     [SerializeField] private bool canJump = true;
+    [SerializeField] private bool canCrouch = true;
+    [SerializeField] private bool canSprint = true;
 
     [Header("Walk Parameters")]
-    [SerializeField] private float speed = 5f;
+    [SerializeField] private float defaultSpeed = 5f;
+    private float speed = 5f;
     private CharacterController controller;
     private Vector3 playerVelocity;
+
+    [Header("Crouch Parameters")]
+    [SerializeField] private float crouchSpeed = 2f;
+    private float crouchTimer;
+    private bool isCrouching;
+    private bool lerpCrouch;
+
+    [Header("Sprint Parameters")]
+    [SerializeField] private float sprintSpeed = 8f;
+    private bool isSprinting;
+
 
     [Header("Jump and Gravity Parameters")]
     public float gravity = -9.8f;
@@ -25,6 +39,10 @@ public class PlayerMotor : MonoBehaviour
     [Header("Headbob Parameters")]
     [SerializeField] private float walkBobSpeed = 12f;
     [SerializeField] private float walkBobAmount = .05f;
+    [SerializeField] private float crouchBobSpeed = 4f;
+    [SerializeField] private float crouchBobAmount = .025f;
+    [SerializeField] private float sprintBobSpeed = 16f;
+    [SerializeField] private float sprintBobAmount = .1f;
     private float defaultYPos = 0;
     private float timer;
     public Camera cam;
@@ -46,6 +64,24 @@ public class PlayerMotor : MonoBehaviour
     void Update()
     {
         isGrounded = controller.isGrounded;
+
+        if (lerpCrouch)
+        {
+            crouchTimer += Time.deltaTime;
+            float p = crouchTimer / 1f;
+            p *= p;
+
+            if (isCrouching)
+                controller.height = Mathf.Lerp(controller.height, 1, p);
+            else
+                controller.height = Mathf.Lerp(controller.height, 2, p);
+
+            if (p > 1)
+            {
+                lerpCrouch = false;
+                crouchTimer = 0f;
+            }
+        }
     }
 
     //recieve inputs from InputManager.cs script and apply them to character controller
@@ -77,6 +113,28 @@ public class PlayerMotor : MonoBehaviour
         }
     }
 
+    public void Crouch()
+    {
+        if (canCrouch)
+        {
+            isCrouching = !isCrouching;
+            if (isCrouching) speed = crouchSpeed;
+            else speed = defaultSpeed;
+            crouchTimer = 0;
+            lerpCrouch = true;
+        }
+    }
+
+    public void Sprint()
+    {
+        if (canSprint)
+        {
+            isSprinting = !isSprinting;
+            if (isSprinting) speed = sprintSpeed;
+            else speed = defaultSpeed;
+        }
+    }
+
     public void HandleHeadbob(Vector2 input)
     {
         if (headBobbing && canMove)
@@ -85,11 +143,13 @@ public class PlayerMotor : MonoBehaviour
 
             if (Mathf.Abs(input.x) > .1f || Mathf.Abs(input.y) > .1f)
             {
-                timer += Time.deltaTime * (walkBobSpeed);
+                timer += Time.deltaTime * (isCrouching ? crouchBobSpeed : isSprinting ? sprintBobSpeed : walkBobSpeed);
+
                 cam.transform.localPosition = new Vector3(
                     cam.transform.localPosition.x,
-                    defaultYPos + Mathf.Sin(timer) * walkBobAmount,
+                    defaultYPos + Mathf.Sin(timer) * (isCrouching ? crouchBobAmount : isSprinting ? sprintBobAmount : walkBobAmount),
                     cam.transform.localPosition.z);
+
             }   else if (cam.transform.localPosition.y != defaultYPos)
             {
                 cam.transform.localPosition = new Vector3(cam.transform.localPosition.x, defaultYPos, cam.transform.localPosition.z);
