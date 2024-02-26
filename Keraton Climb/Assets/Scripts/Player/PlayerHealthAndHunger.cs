@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,11 +30,21 @@ public class PlayerHealthAndHunger : MonoBehaviour
     [Header("Respawn Point")]
     [SerializeField] private Transform respawnPoint;
 
+    [Header("Supply Parameters")]
+    [SerializeField] private TextMeshProUGUI supplyAmountTMP;
+    private int supplyAmount;
+
+    private InputManager inputManager;
+
     // Start is called before the first frame update
     void Start()
     {
+        inputManager = GetComponent<InputManager>();
+
         health = maxHealth;
         hunger = maxHunger;
+
+        supplyAmount = 0;
     }
 
     // Update is called once per frame
@@ -44,22 +55,12 @@ public class PlayerHealthAndHunger : MonoBehaviour
 
         UpdateHealthAndHungerUI();
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (inputManager.onFoot.UseSupply.triggered)
         {
-            TakeDamage(Random.Range(5, 10));
-        }
-
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            RestoreHealth(Random.Range(5, 10));
+            UseSupply();
         }
 
         hunger -= (1f / 12f) * Time.deltaTime;
-
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            RestoreHunger(Random.Range(5, 10));
-        }
 
         if (health <= 0)
         {
@@ -121,6 +122,23 @@ public class PlayerHealthAndHunger : MonoBehaviour
 
             frontHungerBar.fillAmount = Mathf.Lerp(fillHungerFront, backHungerBar.fillAmount, percentComplete);
         }
+    }
+
+    public void UseSupply()
+    {
+        if (supplyAmount > 0)
+        {
+            supplyAmount--;
+            RestoreHealth(30);
+            RestoreHunger(30);
+            supplyAmountTMP.SetText(supplyAmount.ToString());
+        }
+    }
+
+    public void AddSupply()
+    {
+        supplyAmount++;
+        supplyAmountTMP.SetText(supplyAmount.ToString());
     }
 
     public void TakeDamage(float damage)

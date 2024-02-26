@@ -15,19 +15,19 @@ public class PlayerMotor : MonoBehaviour
     [SerializeField] private bool canSprint = true;
 
     [Header("Walk Parameters")]
-    [SerializeField] private float defaultSpeed = 5f;
-    private float speed = 5f;
+    [SerializeField] private float defaultSpeed = 3f;
+    private float speed;
     private CharacterController controller;
     private Vector3 playerVelocity;
 
     [Header("Crouch Parameters")]
-    [SerializeField] private float crouchSpeed = 2f;
+    [SerializeField] private float crouchSpeed = 1f;
     private float crouchTimer;
     private bool isCrouching;
     private bool lerpCrouch;
 
     [Header("Sprint Parameters")]
-    [SerializeField] private float sprintSpeed = 8f;
+    [SerializeField] private float sprintSpeed = 5f;
     private bool isSprinting;
 
 
@@ -37,11 +37,11 @@ public class PlayerMotor : MonoBehaviour
     private bool isGrounded;
 
     [Header("Headbob Parameters")]
-    [SerializeField] private float walkBobSpeed = 12f;
+    [SerializeField] private float walkBobSpeed = 10f;
     [SerializeField] private float walkBobAmount = .05f;
-    [SerializeField] private float crouchBobSpeed = 4f;
+    [SerializeField] private float crouchBobSpeed = 8f;
     [SerializeField] private float crouchBobAmount = .025f;
-    [SerializeField] private float sprintBobSpeed = 16f;
+    [SerializeField] private float sprintBobSpeed = 14f;
     [SerializeField] private float sprintBobAmount = .1f;
     private float defaultYPos = 0;
     private float timer;
@@ -51,6 +51,7 @@ public class PlayerMotor : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        speed = defaultSpeed;
     }
 
     private void Awake()
