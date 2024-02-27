@@ -21,8 +21,10 @@ public class Supply : Interactable
     //function where interaction designed using code
     protected override void Interact()
     {
-        player.GetComponent<PlayerHealthAndHunger>().AddSupply();
-        gameObject.SetActive(false);
-        Debug.Log("Interacted with " + gameObject.name);
+        if (player.GetComponent<PlayerHealthAndHunger>().supplyAmount < player.GetComponent<PlayerHealthAndHunger>().maxSupplyAmount)
+        {
+            player.GetComponent<PlayerHealthAndHunger>().AddSupply();
+            gameObject.SetActive(false);
+        } else player.GetComponent<PlayerHealthAndHunger>().CantAddMoreSupplyTMP();
     }
 }

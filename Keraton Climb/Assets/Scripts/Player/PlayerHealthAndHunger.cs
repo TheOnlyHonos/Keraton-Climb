@@ -31,15 +31,17 @@ public class PlayerHealthAndHunger : MonoBehaviour
     [SerializeField] private Transform respawnPoint;
 
     [Header("Supply Parameters")]
-    [SerializeField] private TextMeshProUGUI supplyAmountTMP;
-    private int supplyAmount;
+    [SerializeField] public int maxSupplyAmount = 2;
+    public int supplyAmount;
 
+    private PlayerUI playerUI;
     private InputManager inputManager;
 
     // Start is called before the first frame update
     void Start()
     {
         inputManager = GetComponent<InputManager>();
+        playerUI = GetComponent<PlayerUI>();
 
         health = maxHealth;
         hunger = maxHunger;
@@ -131,14 +133,19 @@ public class PlayerHealthAndHunger : MonoBehaviour
             supplyAmount--;
             RestoreHealth(30);
             RestoreHunger(30);
-            supplyAmountTMP.SetText(supplyAmount.ToString());
+            playerUI.UpdateSupplyAmountTMP(supplyAmount.ToString());
         }
     }
 
     public void AddSupply()
     {
         supplyAmount++;
-        supplyAmountTMP.SetText(supplyAmount.ToString());
+        playerUI.UpdateSupplyAmountTMP(supplyAmount.ToString());
+    }
+
+    public void CantAddMoreSupplyTMP()
+    {
+        playerUI.ShowCantAddMoreSupplyTMP();
     }
 
     public void TakeDamage(float damage)

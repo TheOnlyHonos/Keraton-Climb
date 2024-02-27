@@ -285,7 +285,8 @@ MonoBehaviour:
   frontHungerBar: {fileID: 0}
   backHungerBar: {fileID: 0}
   respawnPoint: {fileID: 0}
-  supplyAmountTMP: {fileID: 0}
+  maxSupplyAmount: 2
+  supplyAmount: 0
 --- !u!114 &2562232492246718576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,6 +316,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   promptText: {fileID: 0}
+  supplyAmountTMP: {fileID: 0}
+  cantAddMoreSupplyTMP: {fileID: 0}
+  cantAddMoreSupplyText: You can't carry any more supplies
+  timeToShowCantAddMoreSupplyTMP: 3
 --- !u!54 &6418396338223578620
 Rigidbody:
   m_ObjectHideFlags: 0

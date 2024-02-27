@@ -22,7 +22,7 @@ public class PlayerInteract : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerUI.UpdateText(string.Empty);
+        playerUI.UpdatePromptMessage(string.Empty);
         //create ray from camera to forward
         Ray ray = new Ray(cam.transform.position, cam.transform.forward);
         Debug.DrawRay(ray.origin, ray.direction * distance);
@@ -32,7 +32,7 @@ public class PlayerInteract : MonoBehaviour
             if (hitInfo.collider.GetComponent<Interactable>() != null)
             {
                 Interactable interactable = hitInfo.collider.GetComponent<Interactable>();
-                playerUI.UpdateText(interactable.promptMessage);
+                playerUI.UpdatePromptMessage(interactable.promptMessage);
                 if (inputManager.onFoot.Interact.triggered)
                 {
                     interactable.BaseInteract();
