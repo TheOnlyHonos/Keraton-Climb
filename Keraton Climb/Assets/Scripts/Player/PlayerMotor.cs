@@ -118,9 +118,18 @@ public class PlayerMotor : MonoBehaviour
     {
         if (canCrouch)
         {
+            
             isCrouching = !isCrouching;
-            if (isCrouching) speed = crouchSpeed;
-            else speed = defaultSpeed;
+            if (isCrouching)
+            {
+                speed = crouchSpeed;
+                canSprint = false;
+            }
+            else
+            {
+                speed = defaultSpeed;
+                canSprint = true;
+            }
             crouchTimer = 0;
             lerpCrouch = true;
         }

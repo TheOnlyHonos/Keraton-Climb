@@ -256,7 +256,7 @@ MonoBehaviour:
   defaultSpeed: 3
   crouchSpeed: 1
   sprintSpeed: 5
-  gravity: -9.8
+  gravity: -18
   jumpHeight: 1
   walkBobSpeed: 10
   walkBobAmount: 0.05
