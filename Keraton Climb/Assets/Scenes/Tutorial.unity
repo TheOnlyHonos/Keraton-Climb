@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.7620894, g: 0.78576386, b: 0.7304997, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -351,6 +351,10 @@ PrefabInstance:
       propertyPath: frontHungerBar
       value: 
       objectReference: {fileID: 332918303}
+    - target: {fileID: 5279962245354213839, guid: ef98377d14370044f9defb9f1a8d3fc2, type: 3}
+      propertyPath: PromptTMP
+      value: 
+      objectReference: {fileID: 1246745289}
     - target: {fileID: 5279962245354213839, guid: ef98377d14370044f9defb9f1a8d3fc2, type: 3}
       propertyPath: promptText
       value: 

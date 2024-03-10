@@ -7,10 +7,11 @@ public class PlayerUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI promptText;
     [SerializeField] private TextMeshProUGUI supplyAmountTMP;
-    [SerializeField] private TextMeshProUGUI cantAddMoreSupplyTMP;
+    [SerializeField] private TextMeshProUGUI PromptTMP;
     [SerializeField] private string cantAddMoreSupplyText = "You can't carry any more supplies";
-    [SerializeField] private float timeToShowCantAddMoreSupplyTMP = 3f;
-    private float timeToHideCantAddMoreSupplyTMP;
+    [SerializeField] private string cantStandHereText = "You can't stand here";
+    [SerializeField] private float timeToShowPromptText = 3f;
+    private float timeToHidePromptText;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,9 +20,9 @@ public class PlayerUI : MonoBehaviour
 
     void Update()
     {
-        if (cantAddMoreSupplyTMP != null && (Time.time >= timeToHideCantAddMoreSupplyTMP))
+        if (PromptTMP != null && (Time.time >= timeToHidePromptText))
         {
-            cantAddMoreSupplyTMP.text = string.Empty;
+            PromptTMP.text = string.Empty;
         }
     }
 
@@ -37,8 +38,15 @@ public class PlayerUI : MonoBehaviour
 
     public void ShowCantAddMoreSupplyTMP()
     {
-        cantAddMoreSupplyTMP.text = cantAddMoreSupplyText;
+        PromptTMP.text = cantAddMoreSupplyText;
 
-        timeToHideCantAddMoreSupplyTMP = Time.time + timeToShowCantAddMoreSupplyTMP;
+        timeToHidePromptText = Time.time + timeToShowPromptText;
+    }
+
+    public void ShowCantStandHere()
+    {
+        PromptTMP.text = cantStandHereText;
+
+        timeToHidePromptText = Time.time + timeToShowPromptText;
     }
 }

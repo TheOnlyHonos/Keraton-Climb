@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using UnityEngine.Windows;
 
 public class PlayerMotor : MonoBehaviour
@@ -22,6 +24,10 @@ public class PlayerMotor : MonoBehaviour
 
     [Header("Crouch Parameters")]
     [SerializeField] private float crouchSpeed = 1f;
+    [SerializeField] private float overheadCheckHeight= 1f;
+    [SerializeField] private Transform overheadCheckPoint;
+    [SerializeField] private LayerMask overheadObstacle;
+    bool overheadCheck;
     private float crouchTimer;
     private bool isCrouching;
     private bool lerpCrouch;
@@ -47,10 +53,13 @@ public class PlayerMotor : MonoBehaviour
     private float timer;
     public Camera cam;
 
+    private PlayerUI playerUI;
+
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        playerUI = GetComponent<PlayerUI>();
         speed = defaultSpeed;
     }
 
@@ -65,6 +74,8 @@ public class PlayerMotor : MonoBehaviour
     void Update()
     {
         isGrounded = controller.isGrounded;
+
+        overheadCheck = OverheadDetect();
 
         if (lerpCrouch)
         {
@@ -116,23 +127,27 @@ public class PlayerMotor : MonoBehaviour
 
     public void Crouch()
     {
-        if (canCrouch)
+        if (!overheadCheck)
         {
-            
-            isCrouching = !isCrouching;
-            if (isCrouching)
+            if (canCrouch)
             {
-                speed = crouchSpeed;
-                canSprint = false;
+                isSprinting = false;
+                isCrouching = !isCrouching;
+                if (isCrouching)
+                {
+                    speed = crouchSpeed;
+                    canSprint = false;
+                }
+                else
+                {
+                    speed = defaultSpeed;
+                    canSprint = true;
+                }
+                crouchTimer = 0;
+                lerpCrouch = true;
             }
-            else
-            {
-                speed = defaultSpeed;
-                canSprint = true;
-            }
-            crouchTimer = 0;
-            lerpCrouch = true;
         }
+        else CantStandHereTMP();
     }
 
     public void Sprint()
@@ -165,5 +180,22 @@ public class PlayerMotor : MonoBehaviour
                 cam.transform.localPosition = new Vector3(cam.transform.localPosition.x, defaultYPos, cam.transform.localPosition.z);
             }
         }
+    }
+
+    bool OverheadDetect()
+    {
+        Ray ray = new Ray(overheadCheckPoint.position, overheadCheckPoint.up);
+        Debug.DrawRay(ray.origin, ray.direction * overheadCheckHeight);
+        RaycastHit hitInfo; //variable to store our collision info
+        if (Physics.Raycast(ray, out hitInfo, overheadCheckHeight, overheadObstacle))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public void CantStandHereTMP()
+    {
+        playerUI.ShowCantStandHere();
     }
 }

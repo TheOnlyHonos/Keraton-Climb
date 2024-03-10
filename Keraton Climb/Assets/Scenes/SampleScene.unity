@@ -688,7 +688,7 @@ GameObject:
   - component: {fileID: 551827343}
   - component: {fileID: 551827342}
   - component: {fileID: 551827341}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -833,7 +833,7 @@ GameObject:
   - component: {fileID: 611462465}
   - component: {fileID: 611462464}
   - component: {fileID: 611462463}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -938,7 +938,7 @@ GameObject:
   - component: {fileID: 631971419}
   - component: {fileID: 631971418}
   - component: {fileID: 631971417}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1043,7 +1043,7 @@ GameObject:
   - component: {fileID: 639095796}
   - component: {fileID: 639095795}
   - component: {fileID: 639095794}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1453,7 +1453,7 @@ GameObject:
   - component: {fileID: 998263104}
   - component: {fileID: 998263103}
   - component: {fileID: 998263102}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1667,7 +1667,7 @@ GameObject:
   - component: {fileID: 1080548039}
   - component: {fileID: 1080548038}
   - component: {fileID: 1080548037}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2378,7 +2378,7 @@ GameObject:
   - component: {fileID: 1558657500}
   - component: {fileID: 1558657499}
   - component: {fileID: 1558657498}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3051,6 +3051,10 @@ PrefabInstance:
       propertyPath: frontHungerBar
       value: 
       objectReference: {fileID: 1028111116}
+    - target: {fileID: 5279962245354213839, guid: ef98377d14370044f9defb9f1a8d3fc2, type: 3}
+      propertyPath: PromptTMP
+      value: 
+      objectReference: {fileID: 1235046328}
     - target: {fileID: 5279962245354213839, guid: ef98377d14370044f9defb9f1a8d3fc2, type: 3}
       propertyPath: promptText
       value: 
