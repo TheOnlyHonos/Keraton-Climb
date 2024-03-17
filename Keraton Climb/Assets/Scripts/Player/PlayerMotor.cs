@@ -15,6 +15,7 @@ public class PlayerMotor : MonoBehaviour
     [SerializeField] private bool canJump = true;
     [SerializeField] private bool canCrouch = true;
     [SerializeField] private bool canSprint = true;
+    [SerializeField] private bool useFootsteps = true;
 
     [Header("Walk Parameters")]
     [SerializeField] private float defaultSpeed = 3f;
@@ -25,7 +26,6 @@ public class PlayerMotor : MonoBehaviour
     [Header("Crouch Parameters")]
     [SerializeField] private float crouchSpeed = 1f;
     [SerializeField] private float overheadCheckHeight= 1f;
-    [SerializeField] private Transform overheadCheckPoint;
     [SerializeField] private LayerMask overheadObstacle;
     bool overheadCheck;
     private float crouchTimer;
@@ -41,6 +41,8 @@ public class PlayerMotor : MonoBehaviour
     public float gravity = -9.8f;
     public float jumpHeight = 3f;
     private bool isGrounded;
+    [SerializeField] private AudioClip[] jumpStoneClip = default;
+    [SerializeField] private AudioClip[] jumpDirtClip = default;
 
     [Header("Headbob Parameters")]
     [SerializeField] private float walkBobSpeed = 10f;
@@ -53,6 +55,17 @@ public class PlayerMotor : MonoBehaviour
     private float timer;
     public Camera cam;
 
+    [Header("Footsteps Parameters")]
+    [SerializeField] private float baseStepSpeed = 0.6f;
+    [SerializeField] private float crouchStepMultiplier = 1.2f;
+    [SerializeField] private float sprintStepMultiplier = 0.6f;
+    [SerializeField] private AudioClip[] stoneClip = default;
+    [SerializeField] private AudioClip[] dirtClip = default;
+    private float footStepTimer = 0;
+    private float GetCurrentOffset => isCrouching ? baseStepSpeed * crouchStepMultiplier : isSprinting ? baseStepSpeed * sprintStepMultiplier : baseStepSpeed;
+
+    [SerializeField] private Transform raycastCheckPoint;
+    [SerializeField] private AudioSource playerAudioSource = default;
     private PlayerUI playerUI;
 
     // Start is called before the first frame update
@@ -114,6 +127,8 @@ public class PlayerMotor : MonoBehaviour
             }
 
             controller.Move(playerVelocity * Time.deltaTime);
+            HandleHeadbob(input);
+            HandleFootsteps(input);
         }
     }
 
@@ -122,6 +137,18 @@ public class PlayerMotor : MonoBehaviour
         if (isGrounded && canJump)
         {
             playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
+            if (Physics.Raycast(raycastCheckPoint.transform.position, Vector3.down, out RaycastHit hit, 10))
+            {
+                switch (hit.collider.tag)
+                {
+                    case "Footsteps/Stone":
+                        playerAudioSource.PlayOneShot(jumpStoneClip[Random.Range(0, jumpStoneClip.Length - 1)]);
+                        break;
+                    default:
+                        playerAudioSource.PlayOneShot(jumpDirtClip[Random.Range(0, jumpDirtClip.Length - 1)]);
+                        break;
+                }
+            }
         }
     }
 
@@ -182,9 +209,36 @@ public class PlayerMotor : MonoBehaviour
         }
     }
 
+    public void HandleFootsteps(Vector2 input)
+    {
+        if (useFootsteps)
+        {
+            if (!isGrounded) return;
+            if (input == Vector2.zero) return;
+
+            footStepTimer -= Time.deltaTime;
+            if (footStepTimer < 0)
+            {
+                if (Physics.Raycast(raycastCheckPoint.transform.position, Vector3.down, out RaycastHit hit, 3))
+                {
+                    switch (hit.collider.tag)
+                    {
+                        case "Footsteps/Stone":
+                            playerAudioSource.PlayOneShot(stoneClip[Random.Range(0, stoneClip.Length - 1)]);
+                            break;
+                        default:
+                            playerAudioSource.PlayOneShot(dirtClip[Random.Range(0, dirtClip.Length - 1)]);
+                            break;
+                    }
+                }
+                footStepTimer = GetCurrentOffset;
+            }
+        }
+    }
+
     bool OverheadDetect()
     {
-        Ray ray = new Ray(overheadCheckPoint.position, overheadCheckPoint.up);
+        Ray ray = new Ray(raycastCheckPoint.position, raycastCheckPoint.up);
         Debug.DrawRay(ray.origin, ray.direction * overheadCheckHeight);
         RaycastHit hitInfo; //variable to store our collision info
         if (Physics.Raycast(ray, out hitInfo, overheadCheckHeight, overheadObstacle))
