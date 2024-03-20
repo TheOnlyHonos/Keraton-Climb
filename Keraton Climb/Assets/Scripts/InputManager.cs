@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,9 @@ using UnityEngine.InputSystem;
 public class InputManager : MonoBehaviour
 {
     private PlayerInput playerInput;
+
     public PlayerInput.OnFootActions onFoot;
+    public PlayerInput.POIReadActions onPOIRead;
 
     private PlayerMotor motor;
     private PlayerLook look;
@@ -16,6 +19,7 @@ public class InputManager : MonoBehaviour
     {
         playerInput = new PlayerInput();
         onFoot = playerInput.OnFoot;
+        onPOIRead = playerInput.POIRead;
 
         motor = GetComponent<PlayerMotor>();
         look = GetComponent<PlayerLook>();

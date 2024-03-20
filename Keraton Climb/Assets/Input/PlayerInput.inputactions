@@ -315,6 +315,45 @@
             ]
         },
         {
+            "name": "POIRead",
+            "id": "ad9b27ff-a7b2-4138-a5a9-a005e1ed1457",
+            "actions": [
+                {
+                    "name": "Close",
+                    "type": "Button",
+                    "id": "59cf50f5-ef0d-4fa5-9541-6e5fb0cf2400",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "12e8ed5f-b1d9-45c3-91b5-3882e664514d",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Close",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1b6a3b5d-b13b-4733-ae78-e3bd923fbd19",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Close",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
             "name": "UI",
             "id": "31a17c0c-1da4-4ac4-a6ab-df4fcc55c6e2",
             "actions": [

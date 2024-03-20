@@ -10,7 +10,7 @@ public class PlayerMotor : MonoBehaviour
 {
 
     [Header("Player Options")]
-    [SerializeField] private bool canMove = true;
+    [SerializeField] public bool canMove = true;
     [SerializeField] private bool headBobbing = true;
     [SerializeField] private bool canJump = true;
     [SerializeField] private bool canCrouch = true;
@@ -134,7 +134,7 @@ public class PlayerMotor : MonoBehaviour
 
     public void Jump()
     {
-        if (isGrounded && canJump)
+        if (isGrounded && canJump && canMove)
         {
             playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
             if (Physics.Raycast(raycastCheckPoint.transform.position, Vector3.down, out RaycastHit hit, 10))

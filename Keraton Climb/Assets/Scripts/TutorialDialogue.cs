@@ -5,12 +5,12 @@ using TMPro;
 
 public class TutorialDialogue : MonoBehaviour
 {
-
-    public TextMeshProUGUI textComponent;
-    public string[] lines;
-    public float textSpeed;
-
+    [Header("Tutorial components")]
+    [SerializeField] private TextMeshProUGUI textComponent;
+    [SerializeField] [TextArea] private string[] lines;
+    [SerializeField] private float textSpeed;
     private int index;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,28 +21,55 @@ public class TutorialDialogue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if(index == 0){
-            if(Input.GetKeyDown(KeyCode.Return)){
-                if(textComponent.text == lines[index]){
-                    NextLine();
-                }
-            }
-        }
-
-        if(index == 1){
-            if(Input.GetKeyDown(KeyCode.Space)){
-                if(textComponent.text == lines[index]){
-                    NextLine();
-                }
-            }
-        }
-
-         if(index == 2){
-            if(Input.GetKeyDown(KeyCode.LeftShift)){
-                if(textComponent.text == lines[index]){
-                    NextLine();
-                }
+        if (gameObject.activeSelf)
+        {
+            switch (index)
+            {
+                case 0:
+                    if (Input.GetKeyDown(KeyCode.Return))
+                    {
+                        if (textComponent.text == lines[index])
+                        {
+                            NextLine();
+                        }
+                    }
+                    break;
+                case 1:
+                    if (Input.GetKeyDown(KeyCode.Space))
+                    {
+                        if (textComponent.text == lines[index])
+                        {
+                            NextLine();
+                        }
+                    }
+                    break;
+                case 2:
+                    if (Input.GetKeyDown(KeyCode.LeftShift))
+                    {
+                        if (textComponent.text == lines[index])
+                        {
+                            NextLine();
+                        }
+                    }
+                    break;
+                case 3:
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        if (textComponent.text == lines[index])
+                        {
+                            NextLine();
+                        }
+                    }
+                    break;
+                case 4:
+                    if (Input.GetKeyDown(KeyCode.Return))
+                    {
+                        if (textComponent.text == lines[index])
+                        {
+                            NextLine();
+                        }
+                    }
+                    break;
             }
         }
     }

@@ -337,6 +337,45 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             ]
         },
         {
+            ""name"": ""POIRead"",
+            ""id"": ""ad9b27ff-a7b2-4138-a5a9-a005e1ed1457"",
+            ""actions"": [
+                {
+                    ""name"": ""Close"",
+                    ""type"": ""Button"",
+                    ""id"": ""59cf50f5-ef0d-4fa5-9541-6e5fb0cf2400"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""12e8ed5f-b1d9-45c3-91b5-3882e664514d"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Close"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1b6a3b5d-b13b-4733-ae78-e3bd923fbd19"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Close"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
             ""name"": ""UI"",
             ""id"": ""31a17c0c-1da4-4ac4-a6ab-df4fcc55c6e2"",
             ""actions"": [
@@ -864,6 +903,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_OnFoot_Look = m_OnFoot.FindAction("Look", throwIfNotFound: true);
         m_OnFoot_Interact = m_OnFoot.FindAction("Interact", throwIfNotFound: true);
         m_OnFoot_UseSupply = m_OnFoot.FindAction("Use Supply", throwIfNotFound: true);
+        // POIRead
+        m_POIRead = asset.FindActionMap("POIRead", throwIfNotFound: true);
+        m_POIRead_Close = m_POIRead.FindAction("Close", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1028,6 +1070,52 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     }
     public OnFootActions @OnFoot => new OnFootActions(this);
 
+    // POIRead
+    private readonly InputActionMap m_POIRead;
+    private List<IPOIReadActions> m_POIReadActionsCallbackInterfaces = new List<IPOIReadActions>();
+    private readonly InputAction m_POIRead_Close;
+    public struct POIReadActions
+    {
+        private @PlayerInput m_Wrapper;
+        public POIReadActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Close => m_Wrapper.m_POIRead_Close;
+        public InputActionMap Get() { return m_Wrapper.m_POIRead; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(POIReadActions set) { return set.Get(); }
+        public void AddCallbacks(IPOIReadActions instance)
+        {
+            if (instance == null || m_Wrapper.m_POIReadActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_POIReadActionsCallbackInterfaces.Add(instance);
+            @Close.started += instance.OnClose;
+            @Close.performed += instance.OnClose;
+            @Close.canceled += instance.OnClose;
+        }
+
+        private void UnregisterCallbacks(IPOIReadActions instance)
+        {
+            @Close.started -= instance.OnClose;
+            @Close.performed -= instance.OnClose;
+            @Close.canceled -= instance.OnClose;
+        }
+
+        public void RemoveCallbacks(IPOIReadActions instance)
+        {
+            if (m_Wrapper.m_POIReadActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IPOIReadActions instance)
+        {
+            foreach (var item in m_Wrapper.m_POIReadActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_POIReadActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public POIReadActions @POIRead => new POIReadActions(this);
+
     // UI
     private readonly InputActionMap m_UI;
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
@@ -1154,6 +1242,10 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnUseSupply(InputAction.CallbackContext context);
+    }
+    public interface IPOIReadActions
+    {
+        void OnClose(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
