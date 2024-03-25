@@ -68,8 +68,6 @@ public class PlayerHealthAndHunger : MonoBehaviour
         {
             Die(.3f);
         }
-
-        Debug.Log(health + " " + hunger);
     }
 
     public void UpdateHealthAndHungerUI()
