@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,11 +9,11 @@ public class PlayerHealthAndHunger : MonoBehaviour
 {
     [Header("Health Parameters")]
     [SerializeField] private float maxHealth = 100f;
-    private float health;
+    public float health;
 
     [Header("Hunger Parameters")]
     [SerializeField] private float maxHunger = 100f;
-    private float hunger;
+    public float hunger;
 
     [Header("Bar Animation Parameters")]
     [SerializeField] private float chipSpeed = 2f;
@@ -36,6 +37,7 @@ public class PlayerHealthAndHunger : MonoBehaviour
 
     private PlayerUI playerUI;
     private InputManager inputManager;
+    private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
@@ -43,15 +45,22 @@ public class PlayerHealthAndHunger : MonoBehaviour
         inputManager = GetComponent<InputManager>();
         playerUI = GetComponent<PlayerUI>();
 
-        health = maxHealth;
-        hunger = maxHunger;
-
-        supplyAmount = 0;
+        if (GameObject.Find("GameManager")) {
+            gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+            GetParameterFromGameManager();
+        } else
+        {
+            health = maxHealth;
+            hunger = maxHunger;
+            supplyAmount = 0;
+        }
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(health + hunger);
         health = Mathf.Clamp(health, 0, maxHealth);
         hunger = Mathf.Clamp(hunger, 0, maxHunger);
 
@@ -172,10 +181,29 @@ public class PlayerHealthAndHunger : MonoBehaviour
         lerpTimerHunger = 0f;
     }
 
+    public void SetRespawnPoint(Transform point)
+    {
+        respawnPoint = point;
+    }
+
     public void Die(float healthRatioAtRespawn)
     {
         health = maxHealth * healthRatioAtRespawn;
         transform.position = respawnPoint.position;
         Physics.SyncTransforms();
+    }
+
+    public void SaveParameterForNextLevel()
+    {
+        gameManager.setPlayerValues(health, hunger, supplyAmount);
+    }
+
+    public void GetParameterFromGameManager()
+    {
+        health = gameManager.getPlayerHealth();
+        hunger = gameManager.getPlayerHunger();
+        supplyAmount = gameManager.getPlayerSupplyAmount();
+
+        playerUI.UpdateSupplyAmountTMP(supplyAmount.ToString());
     }
 }
