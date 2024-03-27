@@ -114,7 +114,6 @@ public class PlayerUI : MonoBehaviour
 
     public void OpenPauseMenu()
     {
-
         pauseMenuObj.SetActive(true);
         playerMotor.canMove = false;
         playerLook.canLook = false;

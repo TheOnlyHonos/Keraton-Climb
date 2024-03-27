@@ -14,7 +14,7 @@ public class OptionsMenu : MonoBehaviour
     [SerializeField] private TMP_Dropdown resolutionDropdown;
 
     [Header("Main Menu Obj")]
-    [SerializeField] private bool isPauseMenu = false;
+    [SerializeField] private bool isInPauseMenu = false;
     [SerializeField] private GameObject player;
     private MainMenu mainMenu;
     private PlayerUI pauseMenu;
@@ -23,7 +23,7 @@ public class OptionsMenu : MonoBehaviour
 
     void Start()
     {
-        if (!isPauseMenu)
+        if (!isInPauseMenu)
         {
             mainMenu = GetComponent<MainMenu>();
         } else pauseMenu = player.GetComponent<PlayerUI>();
@@ -78,10 +78,14 @@ public class OptionsMenu : MonoBehaviour
 
     public void CloseOptionsMenu()
     {
-        if (!isPauseMenu)
+        if (!isInPauseMenu)
         {
             mainMenu.CloseOptionsMenu();
         }
-        else pauseMenu.CloseOptionsMenu();
+        else
+        {
+            pauseMenu.CloseOptionsMenu();
+            Debug.Log("Check");
+        }
     }
 }

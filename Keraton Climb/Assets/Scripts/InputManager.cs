@@ -29,6 +29,7 @@ public class InputManager : MonoBehaviour
         onFoot.Jump.performed += ctx => motor.Jump();
         onFoot.Crouch.performed += ctx => motor.Crouch();
         onFoot.Sprint.performed += ctx => motor.Sprint();
+
         onFoot.Exit.performed += ctx => playerUI.OpenPauseMenu();
     }
 

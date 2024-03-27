@@ -922,7 +922,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   masterVolumeMixer: {fileID: 24100000, guid: d4a91b48b4e01f64c84a35b0c4d4a91b, type: 2}
   resolutionDropdown: {fileID: 1805078745120420477}
-  isPauseMenu: 1
+  isInPauseMenu: 1
   player: {fileID: 8783758408525410957}
 --- !u!1 &1038153216971654337
 GameObject:
