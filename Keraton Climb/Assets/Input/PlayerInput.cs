@@ -89,6 +89,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Exit"",
+                    ""type"": ""Button"",
+                    ""id"": ""8051ef17-9a1b-4259-bfef-7859387f7f4c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -331,6 +340,28 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Use Supply"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c7f01a8d-49de-4a06-a783-586620081021"",
+                    ""path"": ""<Keyboard>/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""20571ce8-25fc-42ef-849f-7089a52fd63e"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Exit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -903,6 +934,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_OnFoot_Look = m_OnFoot.FindAction("Look", throwIfNotFound: true);
         m_OnFoot_Interact = m_OnFoot.FindAction("Interact", throwIfNotFound: true);
         m_OnFoot_UseSupply = m_OnFoot.FindAction("Use Supply", throwIfNotFound: true);
+        m_OnFoot_Exit = m_OnFoot.FindAction("Exit", throwIfNotFound: true);
         // POIRead
         m_POIRead = asset.FindActionMap("POIRead", throwIfNotFound: true);
         m_POIRead_Close = m_POIRead.FindAction("Close", throwIfNotFound: true);
@@ -986,6 +1018,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_OnFoot_Look;
     private readonly InputAction m_OnFoot_Interact;
     private readonly InputAction m_OnFoot_UseSupply;
+    private readonly InputAction m_OnFoot_Exit;
     public struct OnFootActions
     {
         private @PlayerInput m_Wrapper;
@@ -997,6 +1030,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_OnFoot_Look;
         public InputAction @Interact => m_Wrapper.m_OnFoot_Interact;
         public InputAction @UseSupply => m_Wrapper.m_OnFoot_UseSupply;
+        public InputAction @Exit => m_Wrapper.m_OnFoot_Exit;
         public InputActionMap Get() { return m_Wrapper.m_OnFoot; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1027,6 +1061,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @UseSupply.started += instance.OnUseSupply;
             @UseSupply.performed += instance.OnUseSupply;
             @UseSupply.canceled += instance.OnUseSupply;
+            @Exit.started += instance.OnExit;
+            @Exit.performed += instance.OnExit;
+            @Exit.canceled += instance.OnExit;
         }
 
         private void UnregisterCallbacks(IOnFootActions instance)
@@ -1052,6 +1089,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @UseSupply.started -= instance.OnUseSupply;
             @UseSupply.performed -= instance.OnUseSupply;
             @UseSupply.canceled -= instance.OnUseSupply;
+            @Exit.started -= instance.OnExit;
+            @Exit.performed -= instance.OnExit;
+            @Exit.canceled -= instance.OnExit;
         }
 
         public void RemoveCallbacks(IOnFootActions instance)
@@ -1242,6 +1282,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnUseSupply(InputAction.CallbackContext context);
+        void OnExit(InputAction.CallbackContext context);
     }
     public interface IPOIReadActions
     {

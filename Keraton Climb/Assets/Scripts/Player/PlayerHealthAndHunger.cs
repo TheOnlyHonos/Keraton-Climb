@@ -60,7 +60,6 @@ public class PlayerHealthAndHunger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(health + hunger);
         health = Mathf.Clamp(health, 0, maxHealth);
         hunger = Mathf.Clamp(hunger, 0, maxHunger);
 

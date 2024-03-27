@@ -12,6 +12,11 @@ public class PlayerLook : MonoBehaviour
     [Header("Sensitivity Parameters")]
     [SerializeField] private float Sensitivity = 30f;
 
+    void Start()
+    {
+        Cursor.visible = false;
+    }
+
     public void ProcessLook(Vector2 input)
     {
         if (canLook)
