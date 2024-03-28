@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerHealthAndHunger : MonoBehaviour
@@ -30,10 +31,12 @@ public class PlayerHealthAndHunger : MonoBehaviour
 
     [Header("Respawn Point")]
     [SerializeField] private Transform respawnPoint;
+    [SerializeField] private Transform levelInitialSpawnPoint;
 
     [Header("Supply Parameters")]
     [SerializeField] public int maxSupplyAmount = 2;
     public int supplyAmount;
+    public int supplyAmountFromPreviousLevel;
 
     private PlayerUI playerUI;
     private InputManager inputManager;
@@ -74,7 +77,7 @@ public class PlayerHealthAndHunger : MonoBehaviour
 
         if (health <= 0)
         {
-            Die(.3f);
+            Die();
         }
     }
 
@@ -185,11 +188,20 @@ public class PlayerHealthAndHunger : MonoBehaviour
         respawnPoint = point;
     }
 
-    public void Die(float healthRatioAtRespawn)
+    public void Damage(float damage)
     {
-        health = maxHealth * healthRatioAtRespawn;
+        health -= damage;
         transform.position = respawnPoint.position;
         Physics.SyncTransforms();
+    }
+
+    public void Die()
+    {
+        /*health = maxHealth;
+        transform.position = levelInitialSpawnPoint.position;
+        Physics.SyncTransforms();*/
+        SaveParameterForRestartLevel();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void SaveParameterForNextLevel()
@@ -197,11 +209,17 @@ public class PlayerHealthAndHunger : MonoBehaviour
         gameManager.setPlayerValues(health, hunger, supplyAmount);
     }
 
+    public void SaveParameterForRestartLevel()
+    {
+        gameManager.setPlayerValues(maxHealth, maxHunger, supplyAmountFromPreviousLevel);
+    }
+
     public void GetParameterFromGameManager()
     {
         health = gameManager.getPlayerHealth();
         hunger = gameManager.getPlayerHunger();
         supplyAmount = gameManager.getPlayerSupplyAmount();
+        supplyAmountFromPreviousLevel = gameManager.getPlayerSupplyAmount();
 
         playerUI.UpdateSupplyAmountTMP(supplyAmount.ToString());
     }

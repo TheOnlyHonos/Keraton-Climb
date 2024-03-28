@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     public float hunger = 100;
     public int supplyAmount = 0;
 
+    //For use after load save
+    public Transform lastCheckpoint;
+
     // Start is called before the first frame update
     void Start()
     {

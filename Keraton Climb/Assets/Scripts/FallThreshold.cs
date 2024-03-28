@@ -11,7 +11,7 @@ public class FallThreshold : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            player.GetComponent<PlayerHealthAndHunger>().Die(.5f);
+            player.GetComponent<PlayerHealthAndHunger>().Damage(35f);
         }
     }
 }
