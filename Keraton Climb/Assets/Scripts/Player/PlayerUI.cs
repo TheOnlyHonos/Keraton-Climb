@@ -35,6 +35,7 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private GameObject optionsObj;
     public bool isOptionsOpen;
 
+    private PlayerHealthAndHunger playerHunger;
     private PlayerMotor playerMotor;
     private PlayerLook playerLook;
     private InputManager inputManager;
@@ -46,6 +47,7 @@ public class PlayerUI : MonoBehaviour
         optionsObj.SetActive(false);
         POIObj.SetActive(false);
 
+        playerHunger = GetComponent<PlayerHealthAndHunger>();
         playerMotor = GetComponent<PlayerMotor>();
         playerLook = GetComponent<PlayerLook>();
         inputManager = GetComponent<InputManager>();
@@ -117,6 +119,7 @@ public class PlayerUI : MonoBehaviour
         pauseMenuObj.SetActive(true);
         playerMotor.canMove = false;
         playerLook.canLook = false;
+        playerHunger.enableHunger = false;
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -127,6 +130,7 @@ public class PlayerUI : MonoBehaviour
         pauseMenuObj.SetActive(false);
         playerMotor.canMove = true;
         playerLook.canLook = true;
+        playerHunger.enableHunger = true;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

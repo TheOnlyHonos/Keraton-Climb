@@ -13,6 +13,7 @@ public class PlayerHealthAndHunger : MonoBehaviour
     public float health;
 
     [Header("Hunger Parameters")]
+    [SerializeField] public bool enableHunger = true;
     [SerializeField] private float maxHunger = 100f;
     public float hunger;
 
@@ -73,7 +74,7 @@ public class PlayerHealthAndHunger : MonoBehaviour
             UseSupply();
         }
 
-        hunger -= (1f / 12f) * Time.deltaTime;
+        if (enableHunger) hunger -= (1f / 12f) * Time.deltaTime;
 
         if (health <= 0)
         {
