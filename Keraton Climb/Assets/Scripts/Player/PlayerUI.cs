@@ -24,6 +24,7 @@ public class PlayerUI : MonoBehaviour
     [Header("Prompt Text")]
     [SerializeField] private string cantAddMoreSupplyText = "You can't carry any more supplies";
     [SerializeField] private string cantStandHereText = "You can't stand here";
+    [SerializeField] private List<string> boonText = new List<string>();
 
     [Header("Pause Menu Param")]
     [SerializeField] private GameObject pauseMenuObj;
@@ -39,6 +40,8 @@ public class PlayerUI : MonoBehaviour
     private PlayerMotor playerMotor;
     private PlayerLook playerLook;
     private InputManager inputManager;
+
+    private int tempBoonId = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -66,13 +69,7 @@ public class PlayerUI : MonoBehaviour
             inputManager.onPOIRead.Enable();
             if (inputManager.onPOIRead.Close.triggered)
             {
-                playerMotor.canMove = true;
-                playerLook.canLook = true;
-
-                POIObj.SetActive(false);
-
-                isPOIOpen = false;
-
+                HidePOIText();
                 inputManager.onPOIRead.Disable();
                 inputManager.onFoot.Enable();
             }
@@ -103,8 +100,20 @@ public class PlayerUI : MonoBehaviour
         timeToHidePromptText = Time.time + timeToShowPromptText;
     }
 
-    public void ShowPOIText(string text)
+    //The boonId functions as follows 0 - no bonuses; 1 - add 1 to max supply amount; 2 - add 20 to max health
+    //3 - add 20 to max hunger; 4 - fully heal player; 5 - restore hunger bar to full; 6 - restore both health and hunger to full
+
+    private void ShowBoonText(int id)
     {
+        promptTMP.text = boonText[id];
+
+        timeToHidePromptText = Time.time + timeToShowPromptText;
+    }
+
+    public void ShowPOIText(string text, int boonId)
+    {
+        tempBoonId = boonId;
+
         playerMotor.canMove = false;
         playerLook.canLook = false;
 
@@ -112,6 +121,18 @@ public class PlayerUI : MonoBehaviour
         POIObj.SetActive(true);
 
         isPOIOpen = true;
+    }
+
+    public void HidePOIText()
+    {
+        playerMotor.canMove = true;
+        playerLook.canLook = true;
+
+        POIObj.SetActive(false);
+
+        isPOIOpen = false;
+
+        ShowBoonText(tempBoonId);
     }
 
     public void OpenPauseMenu()

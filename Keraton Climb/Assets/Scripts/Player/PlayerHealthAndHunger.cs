@@ -11,11 +11,13 @@ public class PlayerHealthAndHunger : MonoBehaviour
     [Header("Health Parameters")]
     [SerializeField] private float maxHealth = 100f;
     public float health;
+    public float maxHealthFromPreviousLevel;
 
     [Header("Hunger Parameters")]
     [SerializeField] public bool enableHunger = true;
     [SerializeField] private float maxHunger = 100f;
     public float hunger;
+    public float maxHungerFromPreviousLevel;
 
     [Header("Bar Animation Parameters")]
     [SerializeField] private float chipSpeed = 2f;
@@ -38,6 +40,7 @@ public class PlayerHealthAndHunger : MonoBehaviour
     [SerializeField] public int maxSupplyAmount = 2;
     public int supplyAmount;
     public int supplyAmountFromPreviousLevel;
+    public int maxSupplyAmountFromPreviousLevel;
 
     private PlayerUI playerUI;
     private InputManager inputManager;
@@ -207,21 +210,70 @@ public class PlayerHealthAndHunger : MonoBehaviour
 
     public void SaveParameterForNextLevel()
     {
-        gameManager.setPlayerValues(health, hunger, supplyAmount);
+        gameManager.setPlayerValues(health, maxHealth, hunger, maxHunger, supplyAmount, maxSupplyAmount);
     }
 
     public void SaveParameterForRestartLevel()
     {
-        gameManager.setPlayerValues(maxHealth, maxHunger, supplyAmountFromPreviousLevel);
+        gameManager.setPlayerValues(maxHealthFromPreviousLevel, maxHealthFromPreviousLevel, maxHungerFromPreviousLevel, maxHungerFromPreviousLevel, supplyAmountFromPreviousLevel, maxSupplyAmountFromPreviousLevel);
     }
 
     public void GetParameterFromGameManager()
     {
         health = gameManager.getPlayerHealth();
+        maxHealth = gameManager.getPlayerMaxHealth();
+        maxHealthFromPreviousLevel = gameManager.getPlayerMaxHealth();
+
+
         hunger = gameManager.getPlayerHunger();
+        maxHunger = gameManager.getPlayerMaxHunger();
+        maxHungerFromPreviousLevel = gameManager.getPlayerMaxHunger();
+
         supplyAmount = gameManager.getPlayerSupplyAmount();
+        maxSupplyAmount = gameManager.getPlayerMaxSupplyAmount();
         supplyAmountFromPreviousLevel = gameManager.getPlayerSupplyAmount();
+        maxSupplyAmountFromPreviousLevel = gameManager.getPlayerMaxSupplyAmount();
 
         playerUI.UpdateSupplyAmountTMP(supplyAmount.ToString());
+    }
+
+    //This functions is to add bonuses to player stats after interacting with a POI obj
+    //The id functions as follows 0 - no bonuses; 1 - add 1 to max supply amount; 2 - add 20 to max health
+    //3 - add 20 to max hunger; 4 - fully heal player; 5 - restore hunger bar to full; 6 - restore both health and hunger to full
+
+    public void RecieveBoonFromPOI(int boonId)
+    {
+        switch (boonId)
+        {
+            case 0:
+                break; 
+            
+            case 1:
+                maxSupplyAmount++;
+                break;
+
+            case 2: 
+                maxHealth += 20; 
+                break;
+
+            case 3:
+                maxHunger += 20;
+                break;
+
+            case 4:
+                health = maxHealth;
+                break;
+
+            case 5:
+                hunger = maxHunger;
+                break;
+
+            case 6:
+                health = maxHealth;
+                hunger = maxHunger;
+                break;
+
+            default: break;
+        }
     }
 }

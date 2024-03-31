@@ -48811,8 +48811,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  maxHealth: 100
   hunger: 100
+  maxHunger: 100
   supplyAmount: 0
+  maxSupplyAmount: 1
+  lastCheckpoint: {fileID: 0}
 --- !u!43 &1184178623
 Mesh:
   m_ObjectHideFlags: 0
@@ -76996,6 +77000,10 @@ PrefabInstance:
         Tebing Keraton. I don't know why they chose that place. It's  a weird place
         to meet but if there is any chance of meeting a survivor. I have to get up
         there."
+      objectReference: {fileID: 0}
+    - target: {fileID: 4612224918092915620, guid: 151785fa910ad45429b47c06f02451c3, type: 3}
+      propertyPath: boonId
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4612224918092915620, guid: 151785fa910ad45429b47c06f02451c3, type: 3}
       propertyPath: player

@@ -6963,6 +6963,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   health: 0
+  enableHunger: 1
   maxHunger: 100
   hunger: 0
   chipSpeed: 2
@@ -6971,8 +6972,10 @@ MonoBehaviour:
   frontHungerBar: {fileID: 4449188353214091282}
   backHungerBar: {fileID: 2054969670624142448}
   respawnPoint: {fileID: 0}
-  maxSupplyAmount: 2
+  levelInitialSpawnPoint: {fileID: 0}
+  maxSupplyAmount: 1
   supplyAmount: 0
+  supplyAmountFromPreviousLevel: 0
 --- !u!114 &2562232492246718576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7009,6 +7012,14 @@ MonoBehaviour:
   timeToShowPromptText: 3
   cantAddMoreSupplyText: You can't carry any more supplies
   cantStandHereText: You can't stand here
+  boonText:
+  - No boon recieved
+  - Maximum supply amount has been increased
+  - Maximum health has been increased
+  - Maximum hunger has been increased
+  - Health has been restored
+  - Hunger has been restored
+  - Health and hunger has been restored
   pauseMenuObj: {fileID: 2841905840801100968}
   resumeButton: {fileID: 5676874889786201318}
   optionsButton: {fileID: 3275706855370089832}
