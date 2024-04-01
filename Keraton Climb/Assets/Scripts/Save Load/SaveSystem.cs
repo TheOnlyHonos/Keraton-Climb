@@ -6,20 +6,13 @@ public static class SaveSystem
 {
     public static void SavePlayer (GameManager manager)
     {
-        Debug.Log("SaveSystem SaveGame");
-
-        BinaryFormatter formatter = new BinaryFormatter();
         string filePath = Application.persistentDataPath + "/keraton_climb.sav";
-        FileStream stream = new FileStream(filePath, FileMode.Create);
 
         PlayerData data = new PlayerData(manager);
-
         Debug.Log(data.supplyAmount + " " + data.lastCheckpointPos[0] + ", " + data.lastCheckpointPos[1] + ", " + data.lastCheckpointPos[2]);
 
-        formatter.Serialize(stream, data);
-        stream.Close();
-
-        Debug.Log("Save succesful");
+        string json = JsonUtility.ToJson(data, false);
+        File.WriteAllText(filePath, json);
     }
 
     public static PlayerData LoadPlayer ()
@@ -27,14 +20,13 @@ public static class SaveSystem
         string filePath = Application.persistentDataPath + "/keraton_climb.sav";
         if (File.Exists(filePath))
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(filePath, FileMode.Open);
+            string json = File.ReadAllText(filePath);
+            PlayerData data = JsonUtility.FromJson<PlayerData>(json);
 
-            PlayerData data = formatter.Deserialize(stream) as PlayerData;
-            stream.Close();
-
+            Debug.Log(data.health + " " +  data.hunger + " " + data.lastCheckpointPos[0] + ", " + data.lastCheckpointPos[1] + ", " + data.lastCheckpointPos[2]);
             return data;
-        } else
+        }
+        else
         {
             Debug.LogError("Save file not found in" + filePath);
             return null;

@@ -128,7 +128,6 @@ public class GameManager : MonoBehaviour
 
     public void SaveGame()
     {
-        Debug.Log("GameManager SaveGame");
         SaveSystem.SavePlayer(this);
     }
 
