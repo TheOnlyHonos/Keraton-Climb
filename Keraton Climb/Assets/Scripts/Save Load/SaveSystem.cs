@@ -1,9 +1,12 @@
 using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine.InputSystem;
 
 public static class SaveSystem
 {
+    static string qwy781f178fhe8fgh = "vyCudgHmP0RcBA9";
+
     public static void SavePlayer (GameManager manager)
     {
         string filePath = Application.persistentDataPath + "/keraton_climb.sav";
@@ -12,7 +15,11 @@ public static class SaveSystem
         Debug.Log(data.supplyAmount + " " + data.lastCheckpointPos[0] + ", " + data.lastCheckpointPos[1] + ", " + data.lastCheckpointPos[2]);
 
         string json = JsonUtility.ToJson(data, false);
-        File.WriteAllText(filePath, json);
+        var encryptedJson = EncryptDecrypt(json);
+
+        File.WriteAllText(filePath, encryptedJson);
+
+        Debug.Log("Saving game");
     }
 
     public static PlayerData LoadPlayer ()
@@ -20,10 +27,11 @@ public static class SaveSystem
         string filePath = Application.persistentDataPath + "/keraton_climb.sav";
         if (File.Exists(filePath))
         {
-            string json = File.ReadAllText(filePath);
-            PlayerData data = JsonUtility.FromJson<PlayerData>(json);
+            var json = File.ReadAllText(filePath);
 
-            Debug.Log(data.health + " " +  data.hunger + " " + data.lastCheckpointPos[0] + ", " + data.lastCheckpointPos[1] + ", " + data.lastCheckpointPos[2]);
+            PlayerData data = JsonUtility.FromJson<PlayerData>(EncryptDecrypt(json));
+
+            Debug.Log("Loading game");
             return data;
         }
         else
@@ -37,5 +45,17 @@ public static class SaveSystem
     {
         string filePath = Application.persistentDataPath + "/keraton_climb.sav";
         File.Delete(filePath);
+    }
+
+    private static string EncryptDecrypt(string data)
+    {
+        string result = "";
+
+        for (int i = 0; i < data.Length; i++)
+        {
+            result += (char)(data[i] ^ qwy781f178fhe8fgh[i % qwy781f178fhe8fgh.Length]);
+        }
+
+        return result;
     }
 }
