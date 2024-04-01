@@ -43,6 +43,8 @@ public class PlayerMotor : MonoBehaviour
     private bool isGrounded;
     [SerializeField] private AudioClip[] jumpStoneClip = default;
     [SerializeField] private AudioClip[] jumpDirtClip = default;
+    [SerializeField] private AudioClip[] jumpWoodClip = default;
+    [SerializeField] private AudioClip[] jumpRockClip = default;
 
     [Header("Headbob Parameters")]
     [SerializeField] private float walkBobSpeed = 10f;
@@ -61,6 +63,8 @@ public class PlayerMotor : MonoBehaviour
     [SerializeField] private float sprintStepMultiplier = 0.6f;
     [SerializeField] private AudioClip[] stoneClip = default;
     [SerializeField] private AudioClip[] dirtClip = default;
+    [SerializeField] private AudioClip[] woodClip = default;
+    [SerializeField] private AudioClip[] rockClip = default;
     private float footStepTimer = 0;
     private float GetCurrentOffset => isCrouching ? baseStepSpeed * crouchStepMultiplier : isSprinting ? baseStepSpeed * sprintStepMultiplier : baseStepSpeed;
 
@@ -144,6 +148,12 @@ public class PlayerMotor : MonoBehaviour
                     case "Footsteps/Stone":
                         playerAudioSource.PlayOneShot(jumpStoneClip[Random.Range(0, jumpStoneClip.Length - 1)]);
                         break;
+                    case "Footsteps/Wood":
+                        playerAudioSource.PlayOneShot(jumpWoodClip[Random.Range(0, jumpWoodClip.Length - 1)]);
+                        break;
+                    case "Footsteps/Rock":
+                        playerAudioSource.PlayOneShot(jumpRockClip[Random.Range(0, jumpRockClip.Length - 1)]);
+                        break;
                     default:
                         playerAudioSource.PlayOneShot(jumpDirtClip[Random.Range(0, jumpDirtClip.Length - 1)]);
                         break;
@@ -174,7 +184,7 @@ public class PlayerMotor : MonoBehaviour
                 lerpCrouch = true;
             }
         }
-        else CantStandHereTMP();
+        else playerUI.ShowCantStandHere();
     }
 
     public void Sprint()
@@ -226,6 +236,12 @@ public class PlayerMotor : MonoBehaviour
                         case "Footsteps/Stone":
                             playerAudioSource.PlayOneShot(stoneClip[Random.Range(0, stoneClip.Length - 1)]);
                             break;
+                        case "Footsteps/Wood":
+                            playerAudioSource.PlayOneShot(woodClip[Random.Range(0, woodClip.Length - 1)]);
+                            break;
+                        case "Footsteps/Rock":
+                            playerAudioSource.PlayOneShot(rockClip[Random.Range(0, rockClip.Length - 1)]);
+                            break;
                         default:
                             playerAudioSource.PlayOneShot(dirtClip[Random.Range(0, dirtClip.Length - 1)]);
                             break;
@@ -246,10 +262,5 @@ public class PlayerMotor : MonoBehaviour
             return true;
         }
         return false;
-    }
-
-    public void CantStandHereTMP()
-    {
-        playerUI.ShowCantStandHere();
     }
 }

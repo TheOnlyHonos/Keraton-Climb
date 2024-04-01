@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,6 +10,7 @@ public class MainMenu : MonoBehaviour
 {
     [Header("Main Menu Buttons")]
     [SerializeField] private Button continueButton;
+    [SerializeField] private GameObject continueButtonObj;
     [SerializeField] private Button newGameButton;
     [SerializeField] private Button optionsButton;
     [SerializeField] private Button exitButton;
@@ -16,23 +19,54 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject optionsObj;
     public bool isOptionsOpen;
 
+    [Header("Game Manager")]
+    private GameManager gameManager;
+
     void Start()
     {
         isOptionsOpen = false;
         optionsObj.SetActive(false);
+
+        if (GameObject.Find("GameManager"))
+        {
+            gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        }
+
+        bool saveFileExist = CheckForSaveFile();
+
+        Debug.Log(saveFileExist);
+
+        if (saveFileExist)
+        {
+            continueButtonObj.SetActive(true);
+        } else continueButtonObj.SetActive(false);
+    }
+
+    public bool CheckForSaveFile()
+    {
+        string filePath = Application.persistentDataPath + "/keraton_climb.sav";
+        if (File.Exists(filePath))
+        {
+            return true;
+        }
+        else
+        {
+            Debug.LogError("Save file not found in" + filePath);
+            return false;
+        }
     }
 
     public void Continue()
     {
-        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-        if (SceneManager.sceneCountInBuildSettings > nextSceneIndex)
-        {
-            SceneManager.LoadScene(nextSceneIndex);
-        }
+        gameManager.LoadGame();
     }
 
     public void NewGame()
     {
+        SaveSystem.DeleteSaveData();
+
+        gameManager.resetValues();
+
         int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
         if (SceneManager.sceneCountInBuildSettings > nextSceneIndex)
         {

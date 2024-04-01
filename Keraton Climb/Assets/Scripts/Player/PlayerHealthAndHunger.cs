@@ -175,12 +175,6 @@ public class PlayerHealthAndHunger : MonoBehaviour
         lerpTimerHealth = 0f;
     }
 
-    public void ReduceHunger(float damage)
-    {
-        hunger -= damage;
-        lerpTimerHunger = 0f;
-    }
-
     public void RestoreHunger(float heal)
     {
         hunger += heal;
@@ -194,7 +188,7 @@ public class PlayerHealthAndHunger : MonoBehaviour
 
     public void Damage(float damage)
     {
-        health -= damage;
+        TakeDamage(damage);
         transform.position = respawnPoint.position;
         Physics.SyncTransforms();
     }
@@ -210,20 +204,39 @@ public class PlayerHealthAndHunger : MonoBehaviour
 
     public void SaveParameterForNextLevel()
     {
-        gameManager.setPlayerValues(health, maxHealth, hunger, maxHunger, supplyAmount, maxSupplyAmount);
+        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        gameManager.setPlayerValues(health, maxHealth, hunger, maxHunger, supplyAmount, maxSupplyAmount, nextSceneIndex, new Vector3(.0f, .0f, .0f));
+        gameManager.SaveGame();
+    }
+
+    public void SaveParameterForReachingCheckpoint(Transform checkpointPosition)
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        gameManager.setPlayerValuesOnCheckpoint(health, maxHealth, hunger, maxHunger, supplyAmount, maxSupplyAmount, currentSceneIndex, transform.position);
+        gameManager.SaveGame();
     }
 
     public void SaveParameterForRestartLevel()
     {
-        gameManager.setPlayerValues(maxHealthFromPreviousLevel, maxHealthFromPreviousLevel, maxHungerFromPreviousLevel, maxHungerFromPreviousLevel, supplyAmountFromPreviousLevel, maxSupplyAmountFromPreviousLevel);
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        gameManager.setPlayerValues(maxHealthFromPreviousLevel, maxHealthFromPreviousLevel, maxHungerFromPreviousLevel, 
+            maxHungerFromPreviousLevel, supplyAmountFromPreviousLevel, maxSupplyAmountFromPreviousLevel, currentSceneIndex, new Vector3(.0f, .0f, .0f));
+        gameManager.SaveGame();
     }
 
     public void GetParameterFromGameManager()
     {
+        if (gameManager.getPlayerPosition() != new Vector3(.0f, .0f, .0f))
+        {
+            transform.position = gameManager.getPlayerPosition();
+            Physics.SyncTransforms();
+
+            Debug.Log(gameManager.getPlayerPosition());
+        }
+
         health = gameManager.getPlayerHealth();
         maxHealth = gameManager.getPlayerMaxHealth();
         maxHealthFromPreviousLevel = gameManager.getPlayerMaxHealth();
-
 
         hunger = gameManager.getPlayerHunger();
         maxHunger = gameManager.getPlayerMaxHunger();

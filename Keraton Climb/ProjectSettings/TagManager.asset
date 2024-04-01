@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Fall Limit
   - Footsteps/Stone
+  - Footsteps/Wood
+  - Footsteps/Rock
   layers:
   - Default
   - TransparentFX
