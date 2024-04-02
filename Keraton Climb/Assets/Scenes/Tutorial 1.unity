@@ -131,6 +131,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3172511344292523684, guid: ef98377d14370044f9defb9f1a8d3fc2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4713753337376976099, guid: ef98377d14370044f9defb9f1a8d3fc2, type: 3}
       propertyPath: respawnPoint
       value: 
@@ -194,6 +198,10 @@ PrefabInstance:
     - target: {fileID: 8783758408525410957, guid: ef98377d14370044f9defb9f1a8d3fc2, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8783758408525410957, guid: ef98377d14370044f9defb9f1a8d3fc2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
