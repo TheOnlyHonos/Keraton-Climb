@@ -34,7 +34,7 @@ public class PlayerMotor : MonoBehaviour
 
     [Header("Sprint Parameters")]
     [SerializeField] private float sprintSpeed = 5f;
-    private bool isSprinting;
+    public bool isSprinting;
 
 
     [Header("Jump and Gravity Parameters")]

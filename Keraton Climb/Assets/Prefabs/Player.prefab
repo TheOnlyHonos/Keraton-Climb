@@ -6105,7 +6105,7 @@ GameObject:
   - component: {fileID: 1808125252038279210}
   - component: {fileID: 8359293028492345763}
   m_Layer: 5
-  m_Name: DialogueBox
+  m_Name: Tutorial Dialogue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6185,9 +6185,14 @@ MonoBehaviour:
   lines:
   - Press Enter to continue
   - Press "Spacebar" to jump
-  - Press "Shift" to sprint
-  - Press "E" to interact with objects
-  - 'Press "H" to use supply if you have any.
+  - 'Press "Shift" to sprint
+
+    Sprinting will reduce hunger quickly'
+  - 'Press "E" to interact with objects
+
+    Objects may give certain bonuses'
+  - Press "H" to use supply if you have any
+  - 'Supplies will restore health and hunger
 
     Press Enter to close tutorial'
   textSpeed: 0.03
@@ -7526,6 +7531,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   sprintSpeed: 5
+  isSprinting: 0
   gravity: -18
   jumpHeight: 1
   jumpStoneClip:

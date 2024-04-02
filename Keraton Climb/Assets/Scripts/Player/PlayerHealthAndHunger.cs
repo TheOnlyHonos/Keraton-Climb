@@ -43,6 +43,7 @@ public class PlayerHealthAndHunger : MonoBehaviour
     public int maxSupplyAmountFromPreviousLevel;
 
     private PlayerUI playerUI;
+    private PlayerMotor playerMotor;
     private InputManager inputManager;
     private GameManager gameManager;
 
@@ -51,6 +52,7 @@ public class PlayerHealthAndHunger : MonoBehaviour
     {
         inputManager = GetComponent<InputManager>();
         playerUI = GetComponent<PlayerUI>();
+        playerMotor = GetComponent<PlayerMotor>();
 
         if (GameObject.Find("GameManager")) {
             gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -77,7 +79,13 @@ public class PlayerHealthAndHunger : MonoBehaviour
             UseSupply();
         }
 
-        if (enableHunger) hunger -= (1f / 12f) * Time.deltaTime;
+        if (enableHunger)
+        {
+            if (playerMotor.isSprinting)
+            {
+                hunger -= 1f * Time.deltaTime;
+            } else hunger -= (1f / 12f) * Time.deltaTime;
+        }
 
         if (health <= 0)
         {

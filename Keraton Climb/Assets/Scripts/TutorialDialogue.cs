@@ -62,6 +62,15 @@ public class TutorialDialogue : MonoBehaviour
                     }
                     break;
                 case 4:
+                    if (Input.GetKeyDown(KeyCode.H))
+                    {
+                        if (textComponent.text == lines[index])
+                        {
+                            NextLine();
+                        }
+                    }
+                    break;
+                case 5:
                     if (Input.GetKeyDown(KeyCode.Return))
                     {
                         if (textComponent.text == lines[index])
