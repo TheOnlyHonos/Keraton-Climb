@@ -183,6 +183,14 @@ PrefabInstance:
       propertyPath: playMusic
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7097208226817937146, guid: ef98377d14370044f9defb9f1a8d3fc2, type: 3}
+      propertyPath: nextLevelName
+      value: Level 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097208226817937146, guid: ef98377d14370044f9defb9f1a8d3fc2, type: 3}
+      propertyPath: currentLevelName
+      value: Tebing Keraton
+      objectReference: {fileID: 0}
     - target: {fileID: 8783758408525410957, guid: ef98377d14370044f9defb9f1a8d3fc2, type: 3}
       propertyPath: m_Name
       value: Player
