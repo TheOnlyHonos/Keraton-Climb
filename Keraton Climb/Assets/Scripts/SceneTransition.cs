@@ -9,7 +9,7 @@ public class SceneTransition : MonoBehaviour
     [SerializeField] private TextMeshProUGUI transitionTMP;
     [SerializeField] private string currentLevelName;
     [SerializeField] private string nextLevelName;
-    public float transitionTime = 1f;
+    public float transitionTime = 2f;
 
     private void Start()
     {

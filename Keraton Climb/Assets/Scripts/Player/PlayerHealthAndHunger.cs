@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static System.TimeZoneInfo;
 
 public class PlayerHealthAndHunger : MonoBehaviour
 {
@@ -18,6 +19,10 @@ public class PlayerHealthAndHunger : MonoBehaviour
     [SerializeField] private float maxHunger = 100f;
     public float hunger;
     public float maxHungerFromPreviousLevel;
+
+    [Header("Death Transition Parameters")]
+    [SerializeField] private Animator deathTransition;
+    private float deathTransitionTime = 7f;
 
     [Header("Bar Animation Parameters")]
     [SerializeField] private float chipSpeed = 2f;
@@ -90,6 +95,11 @@ public class PlayerHealthAndHunger : MonoBehaviour
         if (health <= 0)
         {
             Die();
+        }
+
+        if (hunger <= 0)
+        {
+            StartCoroutine(DieFromHunger());
         }
     }
 
@@ -208,6 +218,20 @@ public class PlayerHealthAndHunger : MonoBehaviour
         Physics.SyncTransforms();*/
         SaveParameterForRestartLevel();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    IEnumerator DieFromHunger()
+    {
+        StartDeathTransition();
+
+        yield return new WaitForSeconds(deathTransitionTime);
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void StartDeathTransition()
+    {
+        deathTransition.SetTrigger("Start");
     }
 
     public void SaveParameterForNextLevel()

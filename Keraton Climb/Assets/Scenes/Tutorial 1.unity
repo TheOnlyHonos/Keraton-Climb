@@ -132,6 +132,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4713753337376976099, guid: ef98377d14370044f9defb9f1a8d3fc2, type: 3}
+      propertyPath: transition
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4713753337376976099, guid: ef98377d14370044f9defb9f1a8d3fc2, type: 3}
       propertyPath: respawnPoint
       value: 
       objectReference: {fileID: 607958555}
