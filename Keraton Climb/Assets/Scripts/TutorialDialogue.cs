@@ -35,7 +35,7 @@ public class TutorialDialogue : MonoBehaviour
                     }
                     break;
                 case 1:
-                    if (Input.GetKeyDown(KeyCode.Space))
+                    if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
                     {
                         if (textComponent.text == lines[index])
                         {
@@ -44,7 +44,7 @@ public class TutorialDialogue : MonoBehaviour
                     }
                     break;
                 case 2:
-                    if (Input.GetKeyDown(KeyCode.LeftShift))
+                    if (Input.GetKeyDown(KeyCode.Space))
                     {
                         if (textComponent.text == lines[index])
                         {
@@ -53,7 +53,7 @@ public class TutorialDialogue : MonoBehaviour
                     }
                     break;
                 case 3:
-                    if (Input.GetKeyDown(KeyCode.E))
+                    if (Input.GetKeyDown(KeyCode.LeftShift))
                     {
                         if (textComponent.text == lines[index])
                         {
@@ -62,7 +62,7 @@ public class TutorialDialogue : MonoBehaviour
                     }
                     break;
                 case 4:
-                    if (Input.GetKeyDown(KeyCode.H))
+                    if (Input.GetKeyDown(KeyCode.E))
                     {
                         if (textComponent.text == lines[index])
                         {
@@ -71,6 +71,15 @@ public class TutorialDialogue : MonoBehaviour
                     }
                     break;
                 case 5:
+                    if (Input.GetKeyDown(KeyCode.H))
+                    {
+                        if (textComponent.text == lines[index])
+                        {
+                            NextLine();
+                        }
+                    }
+                    break;
+                case 6:
                     if (Input.GetKeyDown(KeyCode.Return))
                     {
                         if (textComponent.text == lines[index])

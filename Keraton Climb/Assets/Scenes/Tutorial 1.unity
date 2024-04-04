@@ -191,13 +191,6 @@ PrefabInstance:
       propertyPath: currentLevelName
       value: Tebing Keraton
       objectReference: {fileID: 0}
-    - target: {fileID: 8359293028492345763, guid: ef98377d14370044f9defb9f1a8d3fc2, type: 3}
-      propertyPath: lines.Array.data[6]
-      value: 'Using supplies will restore health and hunger.
-
-        Press Enter
-        to close tutorial'
-      objectReference: {fileID: 0}
     - target: {fileID: 8783758408525410957, guid: ef98377d14370044f9defb9f1a8d3fc2, type: 3}
       propertyPath: m_Name
       value: Player

@@ -6183,7 +6183,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 6059819550237974784}
   lines:
-  - Press Enter to continue
+  - Press Enter to start tutorial
+  - Use WASD to move
   - Press "Spacebar" to jump
   - 'Press "Shift" to sprint
 
