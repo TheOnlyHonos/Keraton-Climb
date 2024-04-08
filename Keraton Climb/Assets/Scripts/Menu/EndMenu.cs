@@ -14,6 +14,12 @@ public class EndMenu : MonoBehaviour
     [Header("Survey Parameter")]
     [SerializeField] private string surveyURL;
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
     public void ReturnToMainMenu()
     {
         SceneManager.LoadScene(0);

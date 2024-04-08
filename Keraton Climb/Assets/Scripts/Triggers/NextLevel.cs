@@ -27,11 +27,6 @@ public class NextLevel : MonoBehaviour
 
             int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
 
-            /*if (SceneManager.sceneCountInBuildSettings > nextSceneIndex)
-            {
-                SceneManager.LoadScene(nextSceneIndex);
-            }*/
-
             StartCoroutine(SceneTransition(nextSceneIndex));
         }
     }
