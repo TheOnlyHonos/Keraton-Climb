@@ -37,10 +37,10 @@ public class OptionsMenu : MonoBehaviour
 
         for (int i = 0; i < resolutions.Length; i++)
         {
-            string option = resolutions[i].width + "x" + resolutions[i].height;
+            string option = resolutions[i].width + " X " + resolutions[i].height + " @" + (int)(resolutions[i].refreshRateRatio.value) + "hz";
             resolutionOptions.Add(option);
 
-            if (resolutions[i].width == Screen.width && resolutions[i].height == Screen.height)
+            if (resolutions[i].width == Screen.width && resolutions[i].height == Screen.height && resolutions[i].refreshRateRatio.value == Screen.currentResolution.refreshRateRatio.value)
             {
                 currentResIndex = i;
             }
