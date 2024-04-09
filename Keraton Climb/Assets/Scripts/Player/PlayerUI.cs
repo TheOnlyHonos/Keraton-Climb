@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System;
 
 public class PlayerUI : MonoBehaviour
 {
@@ -25,6 +26,16 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private string cantAddMoreSupplyText = "You can't carry any more supplies";
     [SerializeField] private string cantStandHereText = "You can't stand here";
     [SerializeField] private List<string> boonText = new List<string>();
+
+    [Header("Tutorial components")]
+    [SerializeField] private GameObject tutorialObj;
+    [SerializeField] private TextMeshProUGUI tutorialTMP;
+    [SerializeField] private float textSpeed;
+    private bool tutorialTextTyped = false;
+    private int tutorialIndex;
+
+    [Header("Sprint Indicator")]
+    [SerializeField] private TextMeshProUGUI sprintIndicator;
 
     [Header("Pause Menu Param")]
     [SerializeField] private GameObject pauseMenuObj;
@@ -63,7 +74,7 @@ public class PlayerUI : MonoBehaviour
             promptTMP.text = string.Empty;
         }
 
-        if(isPOIOpen)
+        if (isPOIOpen)
         {
             inputManager.onFoot.Disable();
             inputManager.onPOIRead.Enable();
@@ -73,6 +84,11 @@ public class PlayerUI : MonoBehaviour
                 inputManager.onPOIRead.Disable();
                 inputManager.onFoot.Enable();
             }
+        }
+
+        if (tutorialObj.activeSelf)
+        {
+            HideTutorial();
         }
     }
 
@@ -98,6 +114,93 @@ public class PlayerUI : MonoBehaviour
         promptTMP.text = cantStandHereText;
 
         timeToHidePromptText = Time.time + timeToShowPromptText;
+    }
+
+    public void ShowTutorial(string tutorialText, int tutorialId)
+    {
+        StopAllCoroutines();
+        tutorialObj.SetActive(true);
+        tutorialTMP.text = string.Empty;
+
+        tutorialIndex = tutorialId;
+        tutorialObj.SetActive(true);
+        StartCoroutine(TypeTutorialLine(tutorialText));
+        tutorialTextTyped = true;
+    }
+
+    IEnumerator TypeTutorialLine(string tutorialText)
+    {
+        //type character 1 by 1
+        foreach (char c in tutorialText.ToCharArray())
+        {
+            tutorialTMP.text += c;
+            yield return new WaitForSeconds(textSpeed);
+        }
+    }
+
+    private void HideTutorial()
+    {
+        switch (tutorialIndex)
+        {
+            case 0:
+                if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
+                {
+                    if (tutorialTextTyped)
+                    {
+                        tutorialObj.SetActive(false);
+                    }
+                }
+                break;
+            case 1:
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    if (tutorialTextTyped)
+                    {
+                        tutorialObj.SetActive(false);
+                    }
+                }
+                break;
+            case 2:
+                if (Input.GetKeyDown(KeyCode.H))
+                {
+                    if (tutorialTextTyped)
+                    {
+                        tutorialObj.SetActive(false);
+                    }
+                }
+                break;
+            case 3:
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    if (tutorialTextTyped)
+                    {
+                        tutorialObj.SetActive(false);
+                    }
+                }
+                break;
+            case 4:
+                if (Input.GetKeyDown(KeyCode.LeftShift))
+                {
+                    if (tutorialTextTyped)
+                    {
+                        tutorialObj.SetActive(false);
+                    }
+                }
+                break;
+        }
+    }
+
+    public void ShowAndHideSprintIndicator(bool isSprinting)
+    {
+        if (isSprinting)
+        {
+            sprintIndicator.text = ">>>";
+        } 
+        else
+        {
+            sprintIndicator.text = ">";
+
+        }
     }
 
     //The boonId functions as follows 0 - no bonuses; 1 - add 1 to max supply amount; 2 - add 20 to max health

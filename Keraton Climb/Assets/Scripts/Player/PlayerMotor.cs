@@ -192,6 +192,8 @@ public class PlayerMotor : MonoBehaviour
         if (canSprint)
         {
             isSprinting = !isSprinting;
+            playerUI.ShowAndHideSprintIndicator(isSprinting);
+
             if (isSprinting) speed = sprintSpeed;
             else speed = defaultSpeed;
         }
