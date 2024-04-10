@@ -187,6 +187,33 @@ public class PlayerUI : MonoBehaviour
                     }
                 }
                 break;
+            case 5:
+                if (Input.GetKeyDown(KeyCode.LeftControl))
+                {
+                    if (tutorialTextTyped)
+                    {
+                        tutorialObj.SetActive(false);
+                    }
+                }
+                break;
+            case 6:
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    if (tutorialTextTyped)
+                    {
+                        tutorialObj.SetActive(false);
+                    }
+                }
+                break;
+            case 7:
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    if (tutorialTextTyped)
+                    {
+                        tutorialObj.SetActive(false);
+                    }
+                }
+                break;
         }
     }
 

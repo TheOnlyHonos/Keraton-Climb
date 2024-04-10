@@ -22,7 +22,8 @@ public class PlayerHealthAndHunger : MonoBehaviour
 
     [Header("Death Transition Parameters")]
     [SerializeField] private Animator deathTransition;
-    private float deathTransitionTime = 7f;
+    private float deathTransitionTime = 6f;
+    private bool isDead = false;
 
     [Header("Bar Animation Parameters")]
     [SerializeField] private float chipSpeed = 2f;
@@ -49,6 +50,7 @@ public class PlayerHealthAndHunger : MonoBehaviour
 
     private PlayerUI playerUI;
     private PlayerMotor playerMotor;
+    private PlayerLook playerLook;
     private InputManager inputManager;
     private GameManager gameManager;
 
@@ -58,6 +60,7 @@ public class PlayerHealthAndHunger : MonoBehaviour
         inputManager = GetComponent<InputManager>();
         playerUI = GetComponent<PlayerUI>();
         playerMotor = GetComponent<PlayerMotor>();
+        playerLook = GetComponent<PlayerLook>();
 
         if (GameObject.Find("GameManager")) {
             gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -92,14 +95,17 @@ public class PlayerHealthAndHunger : MonoBehaviour
             } else hunger -= (1f / 12f) * Time.deltaTime;
         }
 
-        if (health <= 0)
+        if (health <= 0 && !isDead)
         {
+            isDead = true;
             Die();
         }
 
         if (hunger <= 0)
         {
-            StartCoroutine(DieFromHunger());
+            //StartCoroutine(DieFromHunger());
+            hunger = maxHunger / 2;
+            TakeDamage(35f);
         }
     }
 
@@ -204,7 +210,7 @@ public class PlayerHealthAndHunger : MonoBehaviour
         respawnPoint = point;
     }
 
-    public void Damage(float damage)
+    public void Fall(float damage)
     {
         TakeDamage(damage);
         transform.position = respawnPoint.position;
@@ -213,20 +219,30 @@ public class PlayerHealthAndHunger : MonoBehaviour
 
     public void Die()
     {
-        /*health = maxHealth;
-        transform.position = levelInitialSpawnPoint.position;
-        Physics.SyncTransforms();*/
-        SaveParameterForRestartLevel();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        hunger = 0f;
+        playerMotor.canMove = false;
+        playerLook.canLook = false;
+
+        StartCoroutine(FadeToBlackAfterDeath());
+        /*SaveParameterForRestartLevel();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);*/
     }
 
-    IEnumerator DieFromHunger()
+    IEnumerator FadeToBlackAfterDeath()
     {
         StartDeathTransition();
 
         yield return new WaitForSeconds(deathTransitionTime);
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        health = maxHealth / 2;
+        hunger = maxHunger;
+        transform.position = respawnPoint.position;
+        Physics.SyncTransforms();
+
+        playerMotor.canMove = true;
+        playerLook.canLook = true;
+
+        isDead = false;
     }
 
     public void StartDeathTransition()

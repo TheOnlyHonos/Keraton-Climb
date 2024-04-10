@@ -13,6 +13,9 @@ public class OptionsMenu : MonoBehaviour
     [Header("Resolution Dropdown")]
     [SerializeField] private TMP_Dropdown resolutionDropdown;
 
+    [Header("Graphics Dropdown")]
+    [SerializeField] private TMP_Dropdown graphicsDropdown;
+
     [Header("Main Menu Obj")]
     [SerializeField] private bool isInPauseMenu = false;
     [SerializeField] private GameObject player;
@@ -27,7 +30,8 @@ public class OptionsMenu : MonoBehaviour
         {
             mainMenu = GetComponent<MainMenu>();
         } else pauseMenu = player.GetComponent<PlayerUI>();
-        
+
+        graphicsDropdown.value = QualitySettings.GetQualityLevel();
 
         resolutions = Screen.resolutions;
 
