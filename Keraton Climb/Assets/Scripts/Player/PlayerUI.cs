@@ -214,6 +214,15 @@ public class PlayerUI : MonoBehaviour
                     }
                 }
                 break;
+            case 8:
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    if (tutorialTextTyped)
+                    {
+                        tutorialObj.SetActive(false);
+                    }
+                }
+                break;
         }
     }
 

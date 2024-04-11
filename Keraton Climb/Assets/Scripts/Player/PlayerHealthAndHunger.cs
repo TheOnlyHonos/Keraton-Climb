@@ -22,7 +22,7 @@ public class PlayerHealthAndHunger : MonoBehaviour
 
     [Header("Death Transition Parameters")]
     [SerializeField] private Animator deathTransition;
-    private float deathTransitionTime = 6f;
+    private float deathTransitionTime = 3f;
     private bool isDead = false;
 
     [Header("Bar Animation Parameters")]
