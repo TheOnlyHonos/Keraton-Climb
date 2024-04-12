@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.InputSystem.EnhancedTouch;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class OptionsMenu : MonoBehaviour
@@ -16,11 +18,19 @@ public class OptionsMenu : MonoBehaviour
     [Header("Graphics Dropdown")]
     [SerializeField] private TMP_Dropdown graphicsDropdown;
 
+    [Header("Volume Slider")]
+    [SerializeField] private Slider volumeSlider;
+
+    [Header("Sensitivity Slider")]
+    [SerializeField] private Slider lookSensitivitySlider;
+
     [Header("Main Menu Obj")]
     [SerializeField] private bool isInPauseMenu = false;
     [SerializeField] private GameObject player;
     private MainMenu mainMenu;
     private PlayerUI pauseMenu;
+    private PlayerLook playerLook;
+    private GameManager gameManager;
 
     private Resolution[] resolutions;
 
@@ -29,7 +39,28 @@ public class OptionsMenu : MonoBehaviour
         if (!isInPauseMenu)
         {
             mainMenu = GetComponent<MainMenu>();
-        } else pauseMenu = player.GetComponent<PlayerUI>();
+
+            if (GameObject.Find("GameManager"))
+            {
+                gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+                volumeSlider.value = gameManager.masterVolume;
+                lookSensitivitySlider.value = gameManager.lookSensitivity;
+                SetLookSensitivity(lookSensitivitySlider.value);
+            }
+        }
+        else
+        {
+            pauseMenu = player.GetComponent<PlayerUI>();
+            playerLook = player.GetComponent<PlayerLook>();
+
+            if (GameObject.Find("GameManager"))
+            {
+                gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+                volumeSlider.value = gameManager.masterVolume;
+                lookSensitivitySlider.value = gameManager.lookSensitivity;
+                SetLookSensitivity(lookSensitivitySlider.value);
+            }
+        }
 
         graphicsDropdown.value = QualitySettings.GetQualityLevel();
 
@@ -59,6 +90,7 @@ public class OptionsMenu : MonoBehaviour
     public void SetVolume(float volume)
     {
         masterVolumeMixer.SetFloat("masterVolume", volume);
+        gameManager.masterVolume = volume;
         Debug.Log(volume);
     }
 
@@ -78,6 +110,16 @@ public class OptionsMenu : MonoBehaviour
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
 
         Debug.Log(resolution);
+    }
+
+    public void SetLookSensitivity(float lookSensitivity)
+    {
+        if (isInPauseMenu)
+        {
+            playerLook.sensitivity = lookSensitivity;
+        }
+        gameManager.lookSensitivity = lookSensitivity;
+        Debug.Log(lookSensitivity);
     }
 
     public void CloseOptionsMenu()

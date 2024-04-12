@@ -10,7 +10,7 @@ public class PlayerLook : MonoBehaviour
     [SerializeField] public bool canLook = true;
 
     [Header("Sensitivity Parameters")]
-    [SerializeField] private float Sensitivity = 30f;
+    public float sensitivity = 30f;
 
     void Start()
     {
@@ -26,13 +26,13 @@ public class PlayerLook : MonoBehaviour
             float mouseY = input.y;
 
             //calculate camera rotation for looking up and down
-            xRotation -= (mouseY * Time.deltaTime) * Sensitivity;
+            xRotation -= (mouseY * Time.deltaTime) * sensitivity;
             xRotation = Mathf.Clamp(xRotation, -80f, 80f);
             //apply to camera transform
             cam.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
             //rotate player to look left and right
-            transform.Rotate(Vector3.up * (mouseX * Time.deltaTime) * Sensitivity);
+            transform.Rotate(Vector3.up * (mouseX * Time.deltaTime) * sensitivity);
         }
     }
 }

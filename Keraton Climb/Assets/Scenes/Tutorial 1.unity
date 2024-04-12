@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 981327044}
-  tutorialText: 'If your heatlh reach zero, you will be respawned at the last checkpoint
+  tutorialText: 'If your health reach zero, you will be respawned at the last checkpoint
     with half health and full hunger.
 
     Press "E" to close this tutorial panel.'
@@ -212,6 +212,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3437404014612451061, guid: ef98377d14370044f9defb9f1a8d3fc2, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3437404014612451061, guid: ef98377d14370044f9defb9f1a8d3fc2, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3437404014612451061, guid: ef98377d14370044f9defb9f1a8d3fc2, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3460716797903973566, guid: ef98377d14370044f9defb9f1a8d3fc2, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3460716797903973566, guid: ef98377d14370044f9defb9f1a8d3fc2, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4713753337376976099, guid: ef98377d14370044f9defb9f1a8d3fc2, type: 3}
       propertyPath: transition
       value: 
@@ -224,6 +244,18 @@ PrefabInstance:
       propertyPath: levelInitialSpawnPoint
       value: 
       objectReference: {fileID: 607958555}
+    - target: {fileID: 5276072337255785409, guid: ef98377d14370044f9defb9f1a8d3fc2, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5276072337255785409, guid: ef98377d14370044f9defb9f1a8d3fc2, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5276072337255785409, guid: ef98377d14370044f9defb9f1a8d3fc2, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6137788179835791559, guid: ef98377d14370044f9defb9f1a8d3fc2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.589
@@ -262,6 +294,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6137788179835791559, guid: ef98377d14370044f9defb9f1a8d3fc2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808277509869287001, guid: ef98377d14370044f9defb9f1a8d3fc2, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808277509869287001, guid: ef98377d14370044f9defb9f1a8d3fc2, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7097208226817937146, guid: ef98377d14370044f9defb9f1a8d3fc2, type: 3}

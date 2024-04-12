@@ -16,19 +16,25 @@ public class GameManager : MonoBehaviour
     public int maxSupplyAmount;
     public int level;
 
+    //Option Values
+    public float masterVolume;
+    public float lookSensitivity;
+
     //For use after load save
     public Vector3 lastPlayerPosition;
 
     public GameManager()
     {
-        this.health = 100;
-        this.maxHealth = 100;
-        this.hunger = 100;
-        this.maxHunger = 100;
+        this.health = 100f;
+        this.maxHealth = 100f;
+        this.hunger = 100f;
+        this.maxHunger = 100f;
         this.supplyAmount = 0;
         this.maxSupplyAmount = 1;
         this.lastPlayerPosition = new Vector3(.0f, .0f, .0f);
         this.level = 0;
+        this.masterVolume = 0f;
+        this.lookSensitivity = 30f;
     }
 
     void Awake()
