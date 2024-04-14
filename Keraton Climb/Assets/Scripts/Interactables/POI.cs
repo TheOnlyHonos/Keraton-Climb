@@ -8,6 +8,10 @@ public class POI : Interactable
     [SerializeField] [TextArea] private string text = null;
     [SerializeField] private int boonId = 0;
 
+    [TextArea]
+    [Tooltip("The boonId functions as follows 0 - no bonuses; 1 - add 1 to max supply amount; 2 - add 20 to max health" +
+        "3 - add 20 to max hunger; 4 - fully heal player; 5 - restore hunger bar to full; 6 - restore both health and hunger to full")]
+
     private bool hasGivenBoon = false;
 
     private PlayerUI playerUI;

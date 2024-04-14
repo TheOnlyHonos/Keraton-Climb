@@ -29,7 +29,7 @@ public class PlayerMotor : MonoBehaviour
     [SerializeField] private LayerMask overheadObstacle;
     bool overheadCheck;
     private float crouchTimer;
-    private bool isCrouching;
+    public bool isCrouching;
     private bool lerpCrouch;
 
     [Header("Sprint Parameters")]
@@ -45,6 +45,7 @@ public class PlayerMotor : MonoBehaviour
     [SerializeField] private AudioClip[] jumpDirtClip = default;
     [SerializeField] private AudioClip[] jumpWoodClip = default;
     [SerializeField] private AudioClip[] jumpRockClip = default;
+    [SerializeField] private AudioClip[] jumpMetalClip = default;
 
     [Header("Headbob Parameters")]
     [SerializeField] private float walkBobSpeed = 10f;
@@ -65,6 +66,7 @@ public class PlayerMotor : MonoBehaviour
     [SerializeField] private AudioClip[] dirtClip = default;
     [SerializeField] private AudioClip[] woodClip = default;
     [SerializeField] private AudioClip[] rockClip = default;
+    [SerializeField] private AudioClip[] metalClip = default;
     private float footStepTimer = 0;
     private float GetCurrentOffset => isCrouching ? baseStepSpeed * crouchStepMultiplier : isSprinting ? baseStepSpeed * sprintStepMultiplier : baseStepSpeed;
 
@@ -154,6 +156,9 @@ public class PlayerMotor : MonoBehaviour
                     case "Footsteps/Rock":
                         playerAudioSource.PlayOneShot(jumpRockClip[Random.Range(0, jumpRockClip.Length - 1)]);
                         break;
+                    case "Footsteps/Metal":
+                        playerAudioSource.PlayOneShot(jumpMetalClip[Random.Range(0, jumpMetalClip.Length - 1)]);
+                        break;
                     default:
                         playerAudioSource.PlayOneShot(jumpDirtClip[Random.Range(0, jumpDirtClip.Length - 1)]);
                         break;
@@ -164,7 +169,7 @@ public class PlayerMotor : MonoBehaviour
 
     public void Crouch()
     {
-        if (!overheadCheck)
+        if (!overheadCheck || !isCrouching)
         {
             if (canCrouch)
             {
@@ -243,6 +248,9 @@ public class PlayerMotor : MonoBehaviour
                             break;
                         case "Footsteps/Rock":
                             playerAudioSource.PlayOneShot(rockClip[Random.Range(0, rockClip.Length - 1)]);
+                            break;
+                        case "Footsteps/Metal":
+                            playerAudioSource.PlayOneShot(metalClip[Random.Range(0, metalClip.Length - 1)]);
                             break;
                         default:
                             playerAudioSource.PlayOneShot(dirtClip[Random.Range(0, dirtClip.Length - 1)]);
