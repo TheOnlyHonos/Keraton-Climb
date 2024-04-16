@@ -8,7 +8,7 @@ using UnityEngine.LowLevel;
 public class FogDensityTrigger : MonoBehaviour
 {
     [Header("Fog Density Transition Parameters")]
-    [SerializeField] private float targetDensity = 0.05f;
+    [SerializeField] private float targetDensity = 0.12f;
     [SerializeField] private float transitionDuration = 2f;
     //check isStartTrigger kalau trigger bakal naikin fog, uncheck kalau trigger bakal nurunin fog 
     [SerializeField] private bool isStartTrigger = true;
@@ -22,7 +22,7 @@ public class FogDensityTrigger : MonoBehaviour
             {
                 if (!hasPassed)
                 {
-                    StartCoroutine(FogTransition(0.01f, targetDensity));
+                    StartCoroutine(FogTransition(0.03f, targetDensity));
                     //RenderSettings.fogDensity = targetDensity;
                     hasPassed = true;
                 }
