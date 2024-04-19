@@ -79680,73 +79680,71 @@ PrefabInstance:
       propertyPath: text
       value: 'Date - 8 April 2024
 
-        
 
-        WHAT IS HAPPENING?! First
-        that giant earthquake, and now everyone is GONE! WHERE IS EVERYONE?! Tried
-        to find out what''s happening on the internet, it''s down, can''t connect
-        to anything.
 
-        
+        WHAT IS HAPPENING?! First that giant
+        earthquake, and now everyone is GONE! WHERE IS EVERYONE?! Tried to find out
+        what''s happening on the internet, it''s down, can''t connect to anything.
 
-        
 
-        Date - 9 April 2024
 
-        
 
-        CAN''T
-        FIND ANYONE! Tried to go as far as I could and still!
-
-        
-
-        
 
         Date
-        - 10 April 2024
+        - 9 April 2024
 
-        
 
-        Brought back some supplies today, still
-        no sign of anyone else. Stores, shops, even malls are untouched. No sign
-        of any looting.
 
-        
+        CAN''T FIND ANYONE! Tried to go as far as I could
+        and still!
 
-        
+
+
+
+
+        Date - 10 April 2024
+
+
+
+        Brought back some
+        supplies today, still no sign of anyone else. Stores, shops, even malls are
+        untouched. No sign of any looting.
+
+
+
+
 
         Date - 11 April 2024
 
-        
+
 
         Electricity
         is still working fine, the internet however is still down, and still no sign
         of anyone.
 
-        
 
-        
+
+
 
         Date - 12 April 2024
 
-        
 
-        Heard
-        a broadcast today, a message to all survivors to go to Tebing Keraton. Why
-        there? Doesn''t matter. If there is any chance of meeting other then...
 
-        
+        Heard a broadcast
+        today, a message to all survivors to go to Tebing Keraton. Why there? Doesn''t
+        matter. If there is any chance of meeting other then...
 
-        
+
+
+
 
         Date
         - 13 April 2024
 
-        
 
-        Road seems broken down from that earthquake
-        several days ago. Have to continue on foot. Luckily the place isn''t that
-        far.'
+
+        Road seems broken down from that earthquake several
+        days ago. Have to continue on foot. Luckily the place isn''t that far.'
       objectReference: {fileID: 0}
     - target: {fileID: 4612224918092915620, guid: 151785fa910ad45429b47c06f02451c3, type: 3}
       propertyPath: boonId
