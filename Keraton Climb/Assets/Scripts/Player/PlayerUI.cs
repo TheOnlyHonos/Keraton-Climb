@@ -72,6 +72,7 @@ public class PlayerUI : MonoBehaviour
         if (promptTMP != null && (Time.time >= timeToHidePromptText))
         {
             promptTMP.text = string.Empty;
+            promptTMP.color = Color.white;
         }
 
         if (isPOIOpen)
@@ -217,7 +218,6 @@ public class PlayerUI : MonoBehaviour
         else
         {
             sprintIndicator.text = ">";
-
         }
     }
 
@@ -226,6 +226,7 @@ public class PlayerUI : MonoBehaviour
 
     private void ShowBoonText(int id)
     {
+        promptTMP.color = Color.green;
         promptTMP.text = boonText[id];
 
         timeToHidePromptText = Time.time + timeToShowPromptText;
