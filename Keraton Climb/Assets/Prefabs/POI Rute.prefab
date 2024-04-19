@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 1410676210865304205}
   - component: {fileID: 5605619679758210613}
   - component: {fileID: 1415529862401281035}
-  - component: {fileID: 7887573539645941053}
+  - component: {fileID: 3073579012828650425}
   - component: {fileID: 3317531312183029368}
   m_Layer: 6
   m_Name: POI Rute
@@ -190,8 +190,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &7887573539645941053
-MeshCollider:
+--- !u!65 &3073579012828650425
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -205,13 +205,12 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 8499393312991987644, guid: 54d3a7a87c773e04bba0b9ea6236aa3f, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 1, y: 2.3999996, z: 1.0000001}
+  m_Center: {x: -0.14981197, y: 1.200002, z: -0.16971028}
 --- !u!114 &3317531312183029368
 MonoBehaviour:
   m_ObjectHideFlags: 0
