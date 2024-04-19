@@ -196,25 +196,7 @@ public class PlayerUI : MonoBehaviour
                     }
                 }
                 break;
-            case 6:
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    if (tutorialTextTyped)
-                    {
-                        tutorialObj.SetActive(false);
-                    }
-                }
-                break;
-            case 7:
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    if (tutorialTextTyped)
-                    {
-                        tutorialObj.SetActive(false);
-                    }
-                }
-                break;
-            case 8:
+            default:
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     if (tutorialTextTyped)
