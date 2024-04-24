@@ -833,9 +833,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1294a74fa9a6f4282c65f50e9dc1db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openSurveyButton: {fileID: 0}
-  returnToMainMenuButton: {fileID: 0}
-  surveyURL: https://docs.unity3d.com/ScriptReference/Application.OpenURL.html
+  openSurveyButton: {fileID: 1439606161}
+  returnToMainMenuButton: {fileID: 316105318}
+  surveyURL: https://forms.gle/1nWzBpH4p5cp7S1H9
 --- !u!1 &978708713
 GameObject:
   m_ObjectHideFlags: 0

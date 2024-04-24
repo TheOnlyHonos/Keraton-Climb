@@ -15,6 +15,10 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Button optionsButton;
     [SerializeField] private Button exitButton;
 
+    [Header("Survey Parameter")]
+    [SerializeField] private string surveyURL;
+    [SerializeField] private Button surveyButton;
+
     [Header("Options Container")]
     [SerializeField] private GameObject optionsObj;
     public bool isOptionsOpen;
@@ -96,6 +100,7 @@ public class MainMenu : MonoBehaviour
             newGameButton.interactable = false;
             optionsButton.interactable = false;
             exitButton.interactable = false;
+            surveyButton.interactable = false;
         }
         else
         {
@@ -103,11 +108,17 @@ public class MainMenu : MonoBehaviour
             newGameButton.interactable = true;
             optionsButton.interactable = true;
             exitButton.interactable = true;
+            surveyButton.interactable = true;
         }
     }
 
     public void Exit()
     {
         Application.Quit();
+    }
+
+    public void OpenSurvey()
+    {
+        Application.OpenURL(surveyURL);
     }
 }
