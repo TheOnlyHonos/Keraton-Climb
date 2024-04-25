@@ -19,6 +19,7 @@ public class SoundtrackTrigger : MonoBehaviour
                 musicManager.GetComponent<MusicManager>().startMusic();
             } else musicManager.GetComponent<MusicManager>().stopMusic();
 
+            gameObject.SetActive(false);
         }
     }
 }
