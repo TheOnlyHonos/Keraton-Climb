@@ -226,7 +226,14 @@ public class PlayerUI : MonoBehaviour
 
     private void ShowBoonText(int id)
     {
-        promptTMP.color = Color.green;
+        if(id == 0)
+        {
+            promptTMP.color = Color.red;
+        }
+        else
+        {
+            promptTMP.color = Color.green;
+        }
         promptTMP.text = boonText[id];
 
         timeToHidePromptText = Time.time + timeToShowPromptText;

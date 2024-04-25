@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ObjectiveWaypointLvl5 : MonoBehaviour
 {
-    [SerializeField] private Image objectiveMarker;
+    [SerializeField] public Image objectiveMarker;
     [SerializeField] private Transform objectiveLocation;
     [SerializeField] private Transform objectiveLocation_2;
     [SerializeField] private TextMeshProUGUI distanceTMP;
