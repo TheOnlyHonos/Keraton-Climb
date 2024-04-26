@@ -17,11 +17,14 @@ public class EndGameTrigger : MonoBehaviour
     [Header("Cutscene Parameters")]
     [SerializeField] private PlayableDirector timeline;
     [SerializeField] private GameObject cutsceneCam;
+    [SerializeField] private PlayableDirector timeline_Tebing;
+    [SerializeField] private GameObject cutsceneCam_Tebing;
 
     [Header("End Game Trigger Parameters")]
     [SerializeField] private GameObject towerEndGameTrigger;
     [SerializeField] private bool isTowerEndGameTrigger = false;
     [SerializeField] private float towerCinematicTime;
+    [SerializeField] private float tebingCinematicTime;
     private ObjectiveWaypointLvl5 objectiveWaypointLvl5;
 
     private PlayerHealthAndHunger playerHunger;
@@ -47,8 +50,20 @@ public class EndGameTrigger : MonoBehaviour
 
             if (!isTowerEndGameTrigger)
             {
-                objectiveWaypointLvl5.moveObjectiveToTower = true;
-                towerEndGameTrigger.SetActive(true);
+                
+
+                cutsceneCam_Tebing.SetActive(true);
+                playerCam.SetActive(false);
+                player.GetComponent<MeshRenderer>().enabled = false;
+
+                playerMotor.canMove = false;
+                playerLook.canLook = false;
+                playerHunger.enableHunger = false; 
+                playerUI.enabled = false;
+                
+                StartCoroutine(TebingCinematic());
+                
+                
             }
             else
             {
@@ -70,11 +85,31 @@ public class EndGameTrigger : MonoBehaviour
 
     IEnumerator TowerCinematic()
     {
+        
         timeline.Play();
         yield return new WaitForSeconds(towerCinematicTime);
 
         int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
         StartCoroutine(SceneTransition(nextSceneIndex));
+    }
+
+     IEnumerator TebingCinematic()
+    {
+        timeline_Tebing.Play();
+        yield return new WaitForSeconds(tebingCinematicTime);
+        cutsceneCam_Tebing.SetActive(false);
+        playerCam.SetActive(true);
+
+        player.GetComponent<MeshRenderer>().enabled = false;
+
+        playerMotor.canMove = true;
+        playerLook.canLook = true;
+        playerHunger.enableHunger = true;
+        playerUI.enabled = true;
+
+        objectiveWaypointLvl5.moveObjectiveToTower = true;
+        towerEndGameTrigger.SetActive(true);
+
     }
 
     IEnumerator SceneTransition(int sceneIndex)
