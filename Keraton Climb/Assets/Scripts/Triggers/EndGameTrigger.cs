@@ -50,7 +50,9 @@ public class EndGameTrigger : MonoBehaviour
 
             if (!isTowerEndGameTrigger)
             {
-                
+                var rotationVector = player.transform.rotation.eulerAngles;
+                rotationVector.y = 60;
+                player.transform.rotation = Quaternion.Euler(0,60,0);
 
                 cutsceneCam_Tebing.SetActive(true);
                 playerCam.SetActive(false);
