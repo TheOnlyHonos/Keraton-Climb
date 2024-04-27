@@ -22,6 +22,7 @@ public class EndGameTrigger : MonoBehaviour
 
     [Header("End Game Trigger Parameters")]
     [SerializeField] private GameObject towerEndGameTrigger;
+    [SerializeField] private GameObject soundtrackEndTrigger;
     [SerializeField] private bool isTowerEndGameTrigger = false;
     [SerializeField] private float towerCinematicTime;
     [SerializeField] private float tebingCinematicTime;
@@ -111,7 +112,7 @@ public class EndGameTrigger : MonoBehaviour
 
         objectiveWaypointLvl5.moveObjectiveToTower = true;
         towerEndGameTrigger.SetActive(true);
-
+        soundtrackEndTrigger.SetActive(true);
     }
 
     IEnumerator SceneTransition(int sceneIndex)

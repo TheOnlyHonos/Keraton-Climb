@@ -117,8 +117,8 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
-    public void OpenSurvey()
+    public void Credits()
     {
-        Application.OpenURL(surveyURL);
+        SceneManager.LoadScene(SceneManager.sceneCountInBuildSettings - 1);
     }
 }

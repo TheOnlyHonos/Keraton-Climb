@@ -113,6 +113,11 @@ public class PlayerMotor : MonoBehaviour
                 crouchTimer = 0f;
             }
         }
+
+        if(!isSprinting && !isCrouching)
+        {
+            playerUI.ShowAndHideSprintIndicator(isSprinting);
+        }
     }
 
     //recieve inputs from InputManager.cs script and apply them to character controller
@@ -177,13 +182,16 @@ public class PlayerMotor : MonoBehaviour
                 isCrouching = !isCrouching;
                 if (isCrouching)
                 {
-                    speed = crouchSpeed;
                     canSprint = false;
+                    isSprinting = false;
+                    playerUI.ShowAndHideSprintIndicator(isSprinting);
+                    speed = crouchSpeed;
                 }
                 else
                 {
-                    speed = defaultSpeed;
                     canSprint = true;
+                    isSprinting = false;
+                    speed = defaultSpeed;
                 }
                 crouchTimer = 0;
                 lerpCrouch = true;
