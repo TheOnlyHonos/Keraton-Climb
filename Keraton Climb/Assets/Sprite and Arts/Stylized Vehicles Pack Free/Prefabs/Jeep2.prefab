@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 8865956996324639457}
   m_Layer: 0
   m_Name: Jeep2
-  m_TagString: Untagged
+  m_TagString: Footsteps/Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8865956996324639457
 Transform:
@@ -52,10 +52,10 @@ GameObject:
   - component: {fileID: 8865956996326932483}
   m_Layer: 0
   m_Name: Jeep2
-  m_TagString: Untagged
+  m_TagString: Footsteps/Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8865956996324639461
 Transform:
@@ -137,10 +137,10 @@ GameObject:
   - component: {fileID: 8865956996326932485}
   m_Layer: 0
   m_Name: door_fl
-  m_TagString: Untagged
+  m_TagString: Footsteps/Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8865956996324639463
 Transform:
@@ -221,10 +221,10 @@ GameObject:
   - component: {fileID: 8865956996326932489}
   m_Layer: 0
   m_Name: BL
-  m_TagString: Untagged
+  m_TagString: Footsteps/Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8865956996324639465
 Transform:
@@ -304,10 +304,10 @@ GameObject:
   - component: {fileID: 8865956996326932491}
   m_Layer: 0
   m_Name: BR
-  m_TagString: Untagged
+  m_TagString: Footsteps/Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8865956996324639467
 Transform:
@@ -387,10 +387,10 @@ GameObject:
   - component: {fileID: 8865956996326932493}
   m_Layer: 0
   m_Name: FL
-  m_TagString: Untagged
+  m_TagString: Footsteps/Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8865956996324639469
 Transform:
@@ -470,10 +470,10 @@ GameObject:
   - component: {fileID: 8865956996326932495}
   m_Layer: 0
   m_Name: FR
-  m_TagString: Untagged
+  m_TagString: Footsteps/Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8865956996324639471
 Transform:
@@ -553,10 +553,10 @@ GameObject:
   - component: {fileID: 8865956996326932487}
   m_Layer: 0
   m_Name: door_fr
-  m_TagString: Untagged
+  m_TagString: Footsteps/Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8865956996324639481
 Transform:
@@ -637,10 +637,10 @@ GameObject:
   - component: {fileID: 8865956996326932505}
   m_Layer: 0
   m_Name: steering_wheel
-  m_TagString: Untagged
+  m_TagString: Footsteps/Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8865956996324639483
 Transform:
